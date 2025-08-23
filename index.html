@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>English Master PRO</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #4CAF50;
+      --primary-dark: #388E3C;
+      --secondary: #2196F3;
+      --danger: #f44336;
+      --warning: #ff9800;
+      --info: #00bcd4;
+      --light: #f8f9fa;
+      --dark: #212121;
+      --background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+      --card-bg: #fff;
+      --text-color: #333;
+      --border-radius: 20px;
+      --shadow: 0 8px 25px rgba(0,0,0,0.2);
+      --transition: all 0.3s ease;
+    }
+
+    .dark-mode {
+      --background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+      --card-bg: #2d3748;
+      --text-color: #e2e8f0;
+      --shadow: 0 8px 25px rgba(0,0,0,0.5);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Roboto, sans-serif;
+      text-align: center;
+      background: var(--background);
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: var(--text-color);
+      transition: var(--transition);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .header-controls {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      padding: 10px 15px;
+      font-size: 14px;
+      cursor: pointer;
+      border: none;
+      border-radius: 12px;
+      background: var(--primary);
+      color: white;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: var(--secondary);
+    }
+
+    .btn-danger {
+      background: var(--danger);
+    }
+
+    .btn-warning {
+      background: var(--warning);
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      padding: 30px;
+      box-shadow: var(--shadow);
+      width: 100%;
+      animation: fadeIn 0.8s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1, h2, h3 {
+      margin-bottom: 15px;
+      color: var(--text-color);
+    }
+
+    select, input {
+      padding: 12px;
+      font-size: 16px;
+      margin-top: 15px;
+      width: 100%;
+      max-width: 300px;
+      border-radius: 12px;
+      border: 1px solid #ccc;
+      outline: none;
+      transition: var(--transition);
+      background: var(--card-bg);
+      color: var(--text-color);
+    }
+
+    input:focus, select:focus {
+      border: 1px solid var(--primary);
+    }
+
+    .game-button {
+      margin-top: 20px;
+      padding: 12px 25px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 12px;
+      background: var(--primary);
+      color: white;
+      transition: var(--transition);
+    }
+
+    .game-button:hover {
+      background: var(--primary-dark);
+      transform: scale(1.05);
+    }
+
+    #word {
+      font-size: 32px;
+      margin: 20px 0;
+      font-weight: bold;
+      color: var(--text-color);
+      min-height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .feedback {
+      font-size: 22px;
+      margin-top: 15px;
+      min-height: 30px;
+      font-weight: bold;
+    }
+
+    .feedback.correct {
+      color: #2ecc71;
+      animation: pop 0.3s ease;
+    }
+
+    .feedback.incorrect {
+      color: #e74c3c;
+      animation: shake 0.4s ease;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
+    }
+
+    .stats {
+      margin-top: 20px;
+      font-size: 18px;
+      color: var(--text-color);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+    }
+
+    .stat-item {
+      background: rgba(0,0,0,0.05);
+      padding: 10px;
+      border-radius: 12px;
+    }
+
+    .progress-container {
+      width: 100%;
+      background: #eee;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 10px;
+      height: 12px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: var(--primary);
+      transition: width 0.3s ease;
+    }
+
+    .timer-container {
+      width: 100%;
+      height: 8px;
+      background: #eee;
+      border-radius: 4px;
+      margin: 15px 0;
+      overflow: hidden;
+    }
+
+    .timer-bar {
+      height: 100%;
+      width: 100%;
+      background: var(--info);
+      transition: width 1s linear;
+    }
+
+    .achievements {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin: 20px 0;
+    }
+
+    .achievement {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--warning);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 20px;
+      opacity: 0.3;
+      transition: var(--transition);
+    }
+
+    .achievement.unlocked {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+
+    .screen {
+      display: none;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .category-item {
+      padding: 20px;
+      border-radius: 12px;
+      background: var(--primary);
+      color: white;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .category-item:hover {
+      transform: translateY(-5px);
+      opacity: 0.9;
+    }
+
+    .leaderboard {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    .leaderboard th, .leaderboard td {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .leaderboard th {
+      background: var(--primary);
+      color: white;
+    }
+
+    .leaderboard tr:nth-child(even) {
+      background: rgba(0,0,0,0.05);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: bold;
+      margin-left: 5px;
+      background: var(--warning);
+      color: white;
+    }
+
+    .xp-bar {
+      height: 10px;
+      margin: 10px 0;
+      background: #e0e0e0;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .xp-progress {
+      height: 100%;
+      background: var(--info);
+      width: 0%;
+      transition: width 0.5s ease;
+    }
+
+    .review-list {
+      text-align: left;
+      max-height: 200px;
+      overflow-y: auto;
+      margin: 20px 0;
+      padding: 10px;
+      background: rgba(0,0,0,0.05);
+      border-radius: 12px;
+    }
+
+    .review-item {
+      padding: 8px;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .review-item:last-child {
+      border-bottom: none;
+    }
+
+    .mode-selector {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin: 20px 0;
+    }
+
+    .mode-btn {
+      padding: 10px 20px;
+      border-radius: 12px;
+      cursor: pointer;
+      background: #e0e0e0;
+      transition: var(--transition);
+    }
+
+    .mode-btn.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    @media (max-width: 600px) {
+      .header {
+        flex-direction: column;
+      }
+      
+      .stats {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Pantalla de inicio -->
+    <div id="start-screen" class="screen active">
+      <div class="card">
+        <h1>English Master PRO</h1>
+        <p>Mejora tu vocabulario en inglés de forma divertida</p>
+        
+        <div class="mode-selector">
+          <div class="mode-btn active" data-mode="practice">Práctica</div>
+          <div class="mode-btn" data-mode="exam">Examen</div>
+        </div>
+        
+        <h3>Selecciona una categoría:</h3>
+        <div class="category-grid">
+          <div class="category-item" data-category="all">Todas</div>
+          <div class="category-item" data-category="animals">Animales</div>
+          <div class="category-item" data-category="verbs">Verbos</div>
+          <div class="category-item" data-category="objects">Objetos</div>
+          <div class="category-item" data-category="food">Comida</div>
+          <div class="category-item" data-category="adjectives">Adjetivos</div>
+        </div>
+        
+        <h3>Dirección de traducción:</h3>
+        <select id="translation-direction">
+          <option value="es-en">Español → Inglés</option>
+          <option value="en-es">Inglés → Español</option>
+        </select>
+        
+        <h3>Nivel de dificultad:</h3>
+        <select id="level">
+          <option value="A1">A1 - Principiante</option>
+          <option value="A2">A2 - Básico</option>
+          <option value="B1">B1 - Intermedio</option>
+          <option value="B2">B2 - Avanzado</option>
+          <option value="C1">C1 - Experto</option>
+        </select>
+        
+        <br>
+        <button class="game-button" onclick="startGame()">Comenzar</button>
+        
+        <div class="achievements">
+          <div class="achievement" id="achievement-10-streak" title="Racha de 10"><i class="fas fa-fire"></i></div>
+          <div class="achievement" id="achievement-50-correct" title="50 correctas"><i class="fas fa-trophy"></i></div>
+          <div class="achievement" id="achievement-perfect" title="Nivel perfecto"><i class="fas fa-star"></i></div>
+        </div>
+        
+        <button class="btn" onclick="showScreen('leaderboard-screen')"><i class="fas fa-trophy"></i> Clasificación</button>
+      </div>
+    </div>
+
+    <!-- Pantalla de juego -->
+    <div id="game-screen" class="screen">
+      <div class="card">
+        <div class="header">
+          <div>
+            <span id="level-display">Nivel: A1</span>
+            <span id="category-display"> | Categoría: Todas</span>
+          </div>
+          <div class="header-controls">
+            <button class="btn" onclick="toggleSound()" id="sound-toggle"><i class="fas fa-volume-up"></i></button>
+            <button class="btn" onclick="toggleDarkMode()"><i class="fas fa-moon"></i></button>
+            <button class="btn" onclick="showScreen('start-screen')"><i class="fas fa-home"></i></button>
+          </div>
+        </div>
+        
+        <div class="xp-bar">
+          <div class="xp-progress" id="xp-bar"></div>
+        </div>
+        <div>Nivel <span id="user-level">1</span> - <span id="xp-text">0/100 XP</span></div>
+        
+        <div id="game-mode-indicator">Modo: Práctica</div>
+        
+        <div id="word">...</div>
+        
+        <div class="timer-container" id="timer-container">
+          <div class="timer-bar" id="timer-bar"></div>
+        </div>
+        
+        <input type="text" id="answer" placeholder="Escribe la traducción..." autocomplete="off">
+        <br>
+        <button class="game-button" onclick="checkAnswer()">Comprobar</button>
+        
+        <p class="feedback" id="feedback"></p>
+        
+        <div class="stats">
+          <div class="stat-item">
+            ⭐ Puntos: <span id="score">0</span>
+          </div>
+          <div class="stat-item">
+            🔥 Racha: <span id="streak">0</span>
+          </div>
+          <div class="stat-item">
+            ✅ Correctas: <span id="correct">0</span>
+          </div>
+          <div class="stat-item">
+            ❌ Incorrectas: <span id="incorrect">0</span>
+          </div>
+        </div>
+        
+        <div id="exam-stats" style="display: none;">
+          <h3>Examen: <span id="exam-progress">0</span>/20</h3>
+        </div>
+        
+        <h3>Palabras para revisar:</h3>
+        <div class="review-list" id="review-list">
+          <p>No hay palabras para revisar todavía</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pantalla de leaderboard -->
+    <div id="leaderboard-screen" class="screen">
+      <div class="card">
+        <h2>Clasificación</h2>
+        <table class="leaderboard">
+          <thead>
+            <tr>
+              <th>Posición</th>
+              <th>Nombre</th>
+              <th>Puntuación</th>
+              <th>Nivel</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboard-body">
+            <!-- Los datos del leaderboard se cargarán aquí -->
+          </tbody>
+        </table>
+        <br>
+        <button class="game-button" onclick="showScreen('start-screen')">Volver</button>
+      </div>
+    </div>
+
+    <!-- Pantalla de resultados de examen -->
+    <div id="exam-results-screen" class="screen">
+      <div class="card">
+        <h2>Resultados del Examen</h2>
+        <div id="exam-score">Puntuación: 0/20</div>
+        <div id="exam-grade">Calificación: </div>
+        <div id="exam-time">Tiempo: 00:00</div>
+        
+        <h3>Palabras falladas:</h3>
+        <div class="review-list" id="exam-review-list">
+          <!-- Las palabras falladas en el examen se mostrarán aquí -->
+        </div>
+        
+        <br>
+        <button class="game-button" onclick="showScreen('start-screen')">Volver al inicio</button>
+      </div>
+    </div>
+  </div>
+
+  <audio id="correct-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-correct-answer-tone-2870.mp3"></audio>
+  <audio id="incorrect-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-wrong-answer-fail-notification-946.mp3"></audio>
+  <audio id="levelup-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-winning-chimes-2015.mp3"></audio>
+
+  <script>
+    // ===== Configuración y estado del juego =====
+    const gameState = {
+      words: [
+        // Animales
+        {"es": "gato", "en": "cat", "level": "A1", "category": "animals"},
+  {"es": "perro", "en": "dog", "level": "A1", "category": "animals"},
+  {"es": "pájaro", "en": "bird", "level": "A1", "category": "animals"},
+  {"es": "pez", "en": "fish", "level": "A1", "category": "animals"},
+  {"es": "rata", "en": "rat", "level": "A1", "category": "animals"},
+  {"es": "ratón", "en": "mouse", "level": "A1", "category": "animals"},
+  {"es": "vaca", "en": "cow", "level": "A1", "category": "animals"},
+  {"es": "cerdo", "en": "pig", "level": "A1", "category": "animals"},
+  {"es": "oveja", "en": "sheep", "level": "A1", "category": "animals"},
+  {"es": "cabra", "en": "goat", "level": "A1", "category": "animals"},
+  {"es": "gallina", "en": "chicken", "level": "A1", "category": "animals"},
+  {"es": "pato", "en": "duck", "level": "A1", "category": "animals"},
+  {"es": "araña", "en": "spider", "level": "A1", "category": "animals"},
+  {"es": "mosca", "en": "fly", "level": "A1", "category": "animals"},
+  {"es": "abeja", "en": "bee", "level": "A1", "category": "animals"},
+  {"es": "hormiga", "en": "ant", "level": "A1", "category": "animals"},
+  {"es": "serpiente", "en": "snake", "level": "A1", "category": "animals"},
+  {"es": "tortuga", "en": "turtle", "level": "A1", "category": "animals"},
+  {"es": "rana", "en": "frog", "level": "A1", "category": "animals"},
+  {"es": "conejo", "en": "rabbit", "level": "A1", "category": "animals"},
+
+  {"es": "caballo", "en": "horse", "level": "A2", "category": "animals"},
+  {"es": "tigre", "en": "tiger", "level": "A2", "category": "animals"},
+  {"es": "león", "en": "lion", "level": "A2", "category": "animals"},
+  {"es": "mono", "en": "monkey", "level": "A2", "category": "animals"},
+  {"es": "oso", "en": "bear", "level": "A2", "category": "animals"},
+  {"es": "lobo", "en": "wolf", "level": "A2", "category": "animals"},
+  {"es": "zorro", "en": "fox", "level": "A2", "category": "animals"},
+  {"es": "cebra", "en": "zebra", "level": "A2", "category": "animals"},
+  {"es": "jirafa", "en": "giraffe", "level": "A2", "category": "animals"},
+  {"es": "elefante", "en": "elephant", "level": "A2", "category": "animals"},
+  {"es": "ciervo", "en": "deer", "level": "A2", "category": "animals"},
+  {"es": "ballena", "en": "whale", "level": "A2", "category": "animals"},
+  {"es": "tiburón", "en": "shark", "level": "A2", "category": "animals"},
+  {"es": "delfín", "en": "dolphin", "level": "A2", "category": "animals"},
+  {"es": "foca", "en": "seal", "level": "A2", "category": "animals"},
+  {"es": "pingüino", "en": "penguin", "level": "A2", "category": "animals"},
+  {"es": "águila", "en": "eagle", "level": "A2", "category": "animals"},
+  {"es": "búho", "en": "owl", "level": "A2", "category": "animals"},
+  {"es": "camello", "en": "camel", "level": "A2", "category": "animals"},
+  {"es": "cocodrilo", "en": "crocodile", "level": "A2", "category": "animals"},
+
+  {"es": "leopardo", "en": "leopard", "level": "B1", "category": "animals"},
+  {"es": "guepardo", "en": "cheetah", "level": "B1", "category": "animals"},
+  {"es": "hipopótamo", "en": "hippopotamus", "level": "B1", "category": "animals"},
+  {"es": "rinoceronte", "en": "rhinoceros", "level": "B1", "category": "animals"},
+  {"es": "gorila", "en": "gorilla", "level": "B1", "category": "animals"},
+  {"es": "chimpancé", "en": "chimpanzee", "level": "B1", "category": "animals"},
+  {"es": "canguro", "en": "kangaroo", "level": "B1", "category": "animals"},
+  {"es": "koala", "en": "koala", "level": "B1", "category": "animals"},
+  {"es": "panda", "en": "panda", "level": "B1", "category": "animals"},
+  {"es": "murciélago", "en": "bat", "level": "B1", "category": "animals"},
+  {"es": "castor", "en": "beaver", "level": "B1", "category": "animals"},
+  {"es": "ardilla", "en": "squirrel", "level": "B1", "category": "animals"},
+  {"es": "erizo", "en": "hedgehog", "level": "B1", "category": "animals"},
+  {"es": "nutria", "en": "otter", "level": "B1", "category": "animals"},
+  {"es": "pulpo", "en": "octopus", "level": "B1", "category": "animals"},
+  {"es": "medusa", "en": "jellyfish", "level": "B1", "category": "animals"},
+  {"es": "calamar", "en": "squid", "level": "B1", "category": "animals"},
+  {"es": "langosta", "en": "lobster", "level": "B1", "category": "animals"},
+  {"es": "flamenco", "en": "flamingo", "level": "B1", "category": "animals"},
+  {"es": "pavo real", "en": "peacock", "level": "B1", "category": "animals"},
+
+  {"es": "tejón", "en": "badger", "level": "B2", "category": "animals"},
+  {"es": "alce", "en": "moose", "level": "B2", "category": "animals"},
+  {"es": "lince", "en": "lynx", "level": "B2", "category": "animals"},
+  {"es": "suricata", "en": "meerkat", "level": "B2", "category": "animals"},
+  {"es": "wombat", "en": "wombat", "level": "B2", "category": "animals"},
+  {"es": "armadillo", "en": "armadillo", "level": "B2", "category": "animals"},
+  {"es": "puercoespín", "en": "porcupine", "level": "B2", "category": "animals"},
+  {"es": "mandril", "en": "mandrill", "level": "B2", "category": "animals"},
+  {"es": "orangután", "en": "orangutan", "level": "B2", "category": "animals"},
+  {"es": "avestruz", "en": "ostrich", "level": "B2", "category": "animals"},
+  {"es": "cóndor", "en": "condor", "level": "B2", "category": "animals"},
+  {"es": "pelícano", "en": "pelican", "level": "B2", "category": "animals"},
+  {"es": "tucán", "en": "toucan", "level": "B2", "category": "animals"},
+  {"es": "raya", "en": "stingray", "level": "B2", "category": "animals"},
+  {"es": "anguila", "en": "eel", "level": "B2", "category": "animals"},
+  {"es": "manatí", "en": "manatee", "level": "B2", "category": "animals"},
+  {"es": "morsa", "en": "walrus", "level": "B2", "category": "animals"},
+  {"es": "foca leopardo", "en": "leopard seal", "level": "B2", "category": "animals"},
+  {"es": "ornitorrinco", "en": "platypus", "level": "B2", "category": "animals"},
+  {"es": "equidna", "en": "echidna", "level": "B2", "category": "animals"},
+
+  {"es": "caracal", "en": "caracal", "level": "C1", "category": "animals"},
+  {"es": "serval", "en": "serval", "level": "C1", "category": "animals"},
+  {"es": "okapi", "en": "okapi", "level": "C1", "category": "animals"},
+  {"es": "tapir", "en": "tapir", "level": "C1", "category": "animals"},
+  {"es": "capibara", "en": "capybara", "level": "C1", "category": "animals"},
+  {"es": "narval", "en": "narwhal", "level": "C1", "category": "animals"},
+  {"es": "beluga", "en": "beluga", "level": "C1", "category": "animals"},
+  {"es": "cachalote", "en": "sperm whale", "level": "C1", "category": "animals"},
+  {"es": "marsopa", "en": "porpoise", "level": "C1", "category": "animals"},
+  {"es": "dugongo", "en": "dugong", "level": "C1", "category": "animals"},
+  {"es": "pangolín", "en": "pangolin", "level": "C1", "category": "animals"},
+  {"es": "lémur", "en": "lemur", "level": "C1", "category": "animals"},
+  {"es": "bonobo", "en": "bonobo", "level": "C1", "category": "animals"},
+  {"es": "babuino", "en": "baboon", "level": "C1", "category": "animals"},
+  {"es": "jerbo", "en": "jerboa", "level": "C1", "category": "animals"},
+  {"es": "cisne", "en": "swan", "level": "C1", "category": "animals"},
+  {"es": "grulla", "en": "crane", "level": "C1", "category": "animals"},
+  {"es": "cacatúa", "en": "cockatoo", "level": "C1", "category": "animals"},
+  {"es": "ajolote", "en": "axolotl", "level": "C1", "category": "animals"},
+  {"es": "dragón de komodo", "en": "Komodo dragon", "level": "C1", "category": "animals"},
+        
+        // VERBOS
+        //Nivel A1 (Verbos Fundamentales)
+        //Estos son los verbos más básicos y esenciales para la supervivencia en el idioma.
+        {"es": "ser", "en": "to be (permanent)", "level": "A1", "category": "verbs"},
+{"es": "estar", "en": "to be (temporary)", "level": "A1", "category": "verbs"},
+{"es": "tener", "en": "to have", "level": "A1", "category": "verbs"},
+{"es": "haber", "en": "to have (auxiliary)", "level": "A1", "category": "verbs"},
+{"es": "hacer", "en": "to do/make", "level": "A1", "category": "verbs"},
+{"es": "ir", "en": "to go", "level": "A1", "category": "verbs"},
+{"es": "venir", "en": "to come", "level": "A1", "category": "verbs"},
+{"es": "poder", "en": "can/to be able to", "level": "A1", "category": "verbs"},
+{"es": "querer", "en": "to want", "level": "A1", "category": "verbs"},
+{"es": "decir", "en": "to say", "level": "A1", "category": "verbs"},
+{"es": "hablar", "en": "to speak", "level": "A1", "category": "verbs"},
+{"es": "comer", "en": "to eat", "level": "A1", "category": "verbs"},
+{"es": "beber", "en": "to drink", "level": "A1", "category": "verbs"},
+{"es": "dormir", "en": "to sleep", "level": "A1", "category": "verbs"},
+{"es": "ver", "en": "to see", "level": "A1", "category": "verbs"},
+{"es": "mirar", "en": "to look", "level": "A1", "category": "verbs"},
+{"es": "escuchar", "en": "to listen", "level": "A1", "category": "verbs"},
+{"es": "oir", "en": "to hear", "level": "A1", "category": "verbs"},
+{"es": "saber", "en": "to know (information)", "level": "A1", "category": "verbs"},
+{"es": "conocer", "en": "to know (people/places)", "level": "A1", "category": "verbs"},
+{"es": "gustar", "en": "to like", "level": "A1", "category": "verbs"},
+{"es": "amar", "en": "to love", "level": "A1", "category": "verbs"},
+{"es": "vivir", "en": "to live", "level": "A1", "category": "verbs"},
+{"es": "trabajar", "en": "to work", "level": "A1", "category": "verbs"},
+{"es": "estudiar", "en": "to study", "level": "A1", "category": "verbs"},
+{"es": "necesitar", "en": "to need", "level": "A1", "category": "verbs"},
+{"es": "comprar", "en": "to buy", "level": "A1", "category": "verbs"},
+{"es": "pagar", "en": "to pay", "level": "A1", "category": "verbs"},
+{"es": "usar", "en": "to use", "level": "A1", "category": "verbs"},
+{"es": "llamar", "en": "to call", "level": "A1", "category": "verbs"},
+{"es": "abrir", "en": "to open", "level": "A1", "category": "verbs"},
+{"es": "cerrar", "en": "to close", "level": "A1", "category": "verbs"},
+{"es": "empezar", "en": "to begin", "level": "A1", "category": "verbs"},
+{"es": "terminar", "en": "to finish", "level": "A1", "category": "verbs"},
+{"es": "entrar", "en": "to enter", "level": "A1", "category": "verbs"},
+{"es": "salir", "en": "to leave", "level": "A1", "category": "verbs"},
+{"es": "jugar", "en": "to play", "level": "A1", "category": "verbs"},
+{"es": "leer", "en": "to read", "level": "A1", "category": "verbs"},
+{"es": "escribir", "en": "to write", "level": "A1", "category": "verbs"},
+{"es": "caminar", "en": "to walk", "level": "A1", "category": "verbs"},
+{"es": "correr", "en": "to run", "level": "A1", "category": "verbs"},
+{"es": "nadar", "en": "to swim", "level": "A1", "category": "verbs"},
+{"es": "cantar", "en": "to sing", "level": "A1", "category": "verbs"},
+{"es": "bailar", "en": "to dance", "level": "A1", "category": "verbs"},
+{"es": "ayudar", "en": "to help", "level": "A1", "category": "verbs"},
+{"es": "buscar", "en": "to look for", "level": "A1", "category": "verbs"},
+{"es": "encontrar", "en": "to find", "level": "A1", "category": "verbs"},
+{"es": "llegar", "en": "to arrive", "level": "A1", "category": "verbs"},
+{"es": "llevar", "en": "to take/carry", "level": "A1", "category": "verbs"},
+{"es": "pensar", "en": "to think", "level": "A1", "category": "verbs"},
+//Nivel A2 (Verbos de Uso Cotidiano)
+//Se amplía el vocabulario con verbos para describir rutinas, acciones pasadas y planes futuros.
+{"es": "entender", "en": "to understand", "level": "A2", "category": "verbs"},
+{"es": "aprender", "en": "to learn", "level": "A2", "category": "verbs"},
+{"es": "enseñar", "en": "to teach", "level": "A2", "category": "verbs"},
+{"es": "explicar", "en": "to explain", "level": "A2", "category": "verbs"},
+{"es": "preguntar", "en": "to ask", "level": "A2", "category": "verbs"},
+{"es": "contestar", "en": "to answer", "level": "A2", "category": "verbs"},
+{"es": "conversar", "en": "to converse", "level": "A2", "category": "verbs"},
+{"es": "viajar", "en": "to travel", "level": "A2", "category": "verbs"},
+{"es": "visitar", "en": "to visit", "level": "A2", "category": "verbs"},
+{"es": "conducir", "en": "to drive", "level": "A2", "category": "verbs"},
+{"es": "esperar", "en": "to wait/hope", "level": "A2", "category": "verbs"},
+{"es": "sentir", "en": "to feel", "level": "A2", "category": "verbs"},
+{"es": "recordar", "en": "to remember", "level": "A2", "category": "verbs"},
+{"es": "olvidar", "en": "to forget", "level": "A2", "category": "verbs"},
+{"es": "elegir", "en": "to choose", "level": "A2", "category": "verbs"},
+{"es": "decidir", "en": "to decide", "level": "A2", "category": "verbs"},
+{"es": "intentar", "en": "to try", "level": "A2", "category": "verbs"},
+{"es": "probar", "en": "to try/taste", "level": "A2", "category": "verbs"},
+{"es": "cambiar", "en": "to change", "level": "A2", "category": "verbs"},
+{"es": "preparar", "en": "to prepare", "level": "A2", "category": "verbs"},
+{"es": "cocinar", "en": "to cook", "level": "A2", "category": "verbs"},
+{"es": "limpiar", "en": "to clean", "level": "A2", "category": "verbs"},
+{"es": "lavar", "en": "to wash", "level": "A2", "category": "verbs"},
+{"es": "descansar", "en": "to rest", "level": "A2", "category": "verbs"},
+{"es": "acostarse", "en": "to go to bed", "level": "A2", "category": "verbs"},
+{"es": "levantarse", "en": "to get up", "level": "A2", "category": "verbs"},
+{"es": "ducharse", "en": "to shower", "level": "A2", "category": "verbs"},
+{"es": "vestirse", "en": "to get dressed", "level": "A2", "category": "verbs"},
+{"es": "poner", "en": "to put", "level": "A2", "category": "verbs"},
+{"es": "quedar", "en": "to stay/meet", "level": "A2", "category": "verbs"},
+{"es": "sacar", "en": "to take out", "level": "A2", "category": "verbs"},
+{"es": "meter", "en": "to put in", "level": "A2", "category": "verbs"},
+{"es": "devolver", "en": "to return (an object)", "level": "A2", "category": "verbs"},
+{"es": "regresar", "en": "to return (to a place)", "level": "A2", "category": "verbs"},
+{"es": "volver", "en": "to come back", "level": "A2", "category": "verbs"},
+{"es": "sentarse", "en": "to sit down", "level": "A2", "category": "verbs"},
+{"es": "levantar", "en": "to lift", "level": "A2", "category": "verbs"},
+{"es": "mostrar", "en": "to show", "level": "A2", "category": "verbs"},
+{"es": "pedir", "en": "to ask for/order", "level": "A2", "category": "verbs"},
+{"es": "recibir", "en": "to receive", "level": "A2", "category": "verbs"},
+{"es": "enviar", "en": "to send", "level": "A2", "category": "verbs"},
+{"es": "ganar", "en": "to win/earn", "level": "A2", "category": "verbs"},
+{"es": "perder", "en": "to lose", "level": "A2", "category": "verbs"},
+{"es": "costar", "en": "to cost", "level": "A2", "category": "verbs"},
+{"es": "gastar", "en": "to spend", "level": "A2", "category": "verbs"},
+{"es": "ahorrar", "en": "to save", "level": "A2", "category": "verbs"},
+{"es": "creer", "en": "to believe", "level": "A2", "category": "verbs"},
+{"es": "ocurrir", "en": "to happen", "level": "A2", "category": "verbs"},
+{"es": "llover", "en": "to rain", "level": "A2", "category": "verbs"},
+{"es": "nevar", "en": "to snow", "level": "A2", "category": "verbs"},
+{"es": "parecer", "en": "to seem", "level": "A2", "category": "verbs"},
+//Nivel B1 (Verbos para Narrar y Argumentar)
+//Verbos para expresar opiniones, deseos, dar consejos y narrar experiencias con más detalle.
+{"es": "lograr", "en": "to achieve", "level": "B1", "category": "verbs"},
+{"es": "mejorar", "en": "to improve", "level": "B1", "category": "verbs"},
+{"es": "desarrollar", "en": "to develop", "level": "B1", "category": "verbs"},
+{"es": "crear", "en": "to create", "level": "B1", "category": "verbs"},
+{"es": "construir", "en": "to build", "level": "B1", "category": "verbs"},
+{"es": "evaluar", "en": "to evaluate", "level": "B1", "category": "verbs"},
+{"es": "analizar", "en": "to analyze", "level": "B1", "category": "verbs"},
+{"es": "resolver", "en": "to solve", "level": "B1", "category": "verbs"},
+{"es": "evitar", "en": "to avoid", "level": "B1", "category": "verbs"},
+{"es": "permitir", "en": "to allow", "level": "B1", "category": "verbs"},
+{"es": "prohibir", "en": "to forbid", "level": "B1", "category": "verbs"},
+{"es": "reconocer", "en": "to recognize", "level": "B1", "category": "verbs"},
+{"es": "considerar", "en": "to consider", "level": "B1", "category": "verbs"},
+{"es": "sugerir", "en": "to suggest", "level": "B1", "category": "verbs"},
+{"es": "recomendar", "en": "to recommend", "level": "B1", "category": "verbs"},
+{"es": "admitir", "en": "to admit", "level": "B1", "category": "verbs"},
+{"es": "negar", "en": "to deny", "level": "B1", "category": "verbs"},
+{"es": "prometer", "en": "to promise", "level": "B1", "category": "verbs"},
+{"es": "amenazar", "en": "to threaten", "level": "B1", "category": "verbs"},
+{"es": "ofrecer", "en": "to offer", "level": "B1", "category": "verbs"},
+{"es": "aceptar", "en": "to accept", "level": "B1", "category": "verbs"},
+{"es": "rechazar", "en": "to reject", "level": "B1", "category": "verbs"},
+{"es": "alcanzar", "en": "to reach", "level": "B1", "category": "verbs"},
+{"es": "aparecer", "en": "to appear", "level": "B1", "category": "verbs"},
+{"es": "desaparecer", "en": "to disappear", "level": "B1", "category": "verbs"},
+{"es": "pertenecer", "en": "to belong", "level": "B1", "category": "verbs"},
+{"es": "significar", "en": "to mean", "level": "B1", "category": "verbs"},
+{"es": "tratar", "en": "to treat/try", "level": "B1", "category": "verbs"},
+{"es": "aumentar", "en": "to increase", "level": "B1", "category": "verbs"},
+{"es": "reducir", "en": "to reduce", "level": "B1", "category": "verbs"},
+{"es": "causar", "en": "to cause", "level": "B1", "category": "verbs"},
+{"es": "influir", "en": "to influence", "level": "B1", "category": "verbs"},
+{"es": "depender", "en": "to depend", "level": "B1", "category": "verbs"},
+{"es": "consistir", "en": "to consist", "level": "B1", "category": "verbs"},
+{"es": "formar", "en": "to form", "level": "B1", "category": "verbs"},
+{"es": "dirigir", "en": "to direct", "level": "B1", "category": "verbs"},
+{"es": "controlar", "en": "to control", "level": "B1", "category": "verbs"},
+{"es": "gestionar", "en": "to manage", "level": "B1", "category": "verbs"},
+{"es": "celebrar", "en": "to celebrate", "level": "B1", "category": "verbs"},
+{"es": "comunicar", "en": "to communicate", "level": "B1", "category": "verbs"},
+{"es": "expresar", "en": "to express", "level": "B1", "category": "verbs"},
+{"es": "describir", "en": "to describe", "level": "B1", "category": "verbs"},
+{"es": "demostrar", "en": "to demonstrate", "level": "B1", "category": "verbs"},
+{"es": "utilizar", "en": "to utilize", "level": "B1", "category": "verbs"},
+{"es": "funcionar", "en": "to function", "level": "B1", "category": "verbs"},
+{"es": "colocar", "en": "to place", "level": "B1", "category": "verbs"},
+{"es": "sustituir", "en": "to substitute", "level": "B1", "category": "verbs"},
+{"es": "notar", "en": "to notice", "level": "B1", "category": "verbs"},
+{"es": "faltar", "en": "to lack", "level": "B1", "category": "verbs"},
+{"es": "sobrar", "en": "to be left over", "level": "B1", "category": "verbs"},
+{"es": "preocupar", "en": "to worry", "level": "B1", "category": "verbs"},
+//Nivel B2 (Verbos de Abstracción y Matiz)
+//Verbos más complejos para expresar ideas abstractas, hipótesis, argumentos sólidos y reacciones emocionales.
+  {"es": "asegurar", "en": "to assure/ensure", "level": "B2", "category": "verbs"},
+{"es": "afirmar", "en": "to affirm", "level": "B2", "category": "verbs"},
+{"es": "necesitar", "en": "to need", "level": "B2", "category": "verbs"},
+{"es": "garantizar", "en": "to guarantee", "level": "B2", "category": "verbs"},
+{"es": "demandar", "en": "to demand", "level": "B2", "category": "verbs"},
+{"es": "exigir", "en": "to require/demand", "level": "B2", "category": "verbs"},
+{"es": "superar", "en": "to overcome", "level": "B2", "category": "verbs"},
+{"es": "destacar", "en": "to emphasize/stand out", "level": "B2", "category": "verbs"},
+{"es": "invertir", "en": "to invest", "level": "B2", "category": "verbs"},
+{"es": "financiar", "en": "to finance", "level": "B2", "category": "verbs"},
+{"es": "establecer", "en": "to establish", "level": "B2", "category": "verbs"},
+{"es": "fundar", "en": "to found", "level": "B2", "category": "verbs"},
+{"es": "ampliar", "en": "to expand", "level": "B2", "category": "verbs"},
+{"es": "profundizar", "en": "to deepen", "level": "B2", "category": "verbs"},
+{"es": "investigar", "en": "to research", "level": "B2", "category": "verbs"},
+{"es": "descubrir", "en": "to discover", "level": "B2", "category": "verbs"},
+{"es": "inventar", "en": "to invent", "level": "B2", "category": "verbs"},
+{"es": "adaptar", "en": "to adapt", "level": "B2", "category": "verbs"},
+{"es": "adquirir", "en": "to acquire", "level": "B2", "category": "verbs"},
+{"es": "poseer", "en": "to possess", "level": "B2", "category": "verbs"},
+{"es": "mantener", "en": "to maintain", "level": "B2", "category": "verbs"},
+{"es": "conservar", "en": "to preserve", "level": "B2", "category": "verbs"},
+{"es": "restaurar", "en": "to restore", "level": "B2", "category": "verbs"},
+{"es": "transformar", "en": "to transform", "level": "B2", "category": "verbs"},
+{"es": "sustituir", "en": "to replace", "level": "B2", "category": "verbs"},
+{"es": "prescindir", "en": "to do without", "level": "B2", "category": "verbs"},
+{"es": "influenciar", "en": "to influence", "level": "B2", "category": "verbs"},
+{"es": "determinar", "en": "to determine", "level": "B2", "category": "verbs"},
+{"es": "definir", "en": "to define", "level": "B2", "category": "verbs"},
+{"es": "caracterizar", "en": "to characterize", "level": "B2", "category": "verbs"},
+{"es": "desempeñar", "en": "to perform (a role)", "level": "B2", "category": "verbs"},
+{"es": "cumplir", "en": "to fulfill", "level": "B2", "category": "verbs"},
+{"es": "incumplir", "en": "to fail to fulfill", "level": "B2", "category": "verbs"},
+{"es": "negociar", "en": "to negotiate", "level": "B2", "category": "verbs"},
+{"es": "colaborar", "en": "to collaborate", "level": "B2", "category": "verbs"},
+{"es": "coordinar", "en": "to coordinate", "level": "B2", "category": "verbs"},
+{"es": "implicar", "en": "to imply/involve", "level": "B2", "category": "verbs"},
+{"es": "suponer", "en": "to suppose", "level": "B2", "category": "verbs"},
+{"es": "deducir", "en": "to deduce", "level": "B2", "category": "verbs"},
+{"es": "concluir", "en": "to conclude", "level": "B2", "category": "verbs"},
+{"es": "manifestar", "en": "to manifest/express", "level": "B2", "category": "verbs"},
+{"es": "reaccionar", "en": "to react", "level": "B2", "category": "verbs"},
+{"es": "criticar", "en": "to criticize", "level": "B2", "category": "verbs"},
+{"es": "cuestionar", "en": "to question", "level": "B2", "category": "verbs"},
+{"es": "dudar", "en": "to doubt", "level": "B2", "category": "verbs"},
+{"es": "sospechar", "en": "to suspect", "level": "B2", "category": "verbs"},
+{"es": "aconsejar", "en": "to advise", "level": "B2", "category": "verbs"},
+{"es": "alertar", "en": "to alert", "level": "B2", "category": "verbs"},
+{"es": "anticipar", "en": "to anticipate", "level": "B2", "category": "verbs"},
+{"es": "predecir", "en": "to predict", "level": "B2", "category": "verbs"},
+{"es": "comprometerse", "en": "to commit", "level": "B2", "category": "verbs"},
+//Nivel C1 (Verbos de Alta Especificidad y Abstracción)
+//Verbos para un dominio preciso del idioma, usados en contextos académicos, profesionales y literarios. 
+{"es": "atemperar", "en": "to temper/modulate", "level": "C1", "category": "verbs"},
+{"es": "subyacer", "en": "to underlie", "level": "C1", "category": "verbs"},
+{"es": "presuponer", "en": "to presuppose", "level": "C1", "category": "verbs"},
+{"es": "concebir", "en": "to conceive", "level": "C1", "category": "verbs"},
+{"es": "percibir", "en": "to perceive", "level": "C1", "category": "verbs"},
+{"es": "discernir", "en": "to discern", "level": "C1", "category": "verbs"},
+{"es": "atemorizar", "en": "to frighten", "level": "C1", "category": "verbs"},
+{"es": "atemorizarse", "en": "to become frightened", "level": "C1", "category": "verbs"},
+{"es": "vulnerar", "en": "to violate", "level": "C1", "category": "verbs"},
+{"es": "resarcir", "en": "to compensate", "level": "C1", "category": "verbs"},
+{"es": "sancionar", "en": "to sanction", "level": "C1", "category": "verbs"},
+{"es": "legislar", "en": "to legislate", "level": "C1", "category": "verbs"},
+{"es": "reglamentar", "en": "to regulate", "level": "C1", "category": "verbs"},
+{"es": "arbitrar", "en": "to arbitrate", "level": "C1", "category": "verbs"},
+{"es": "medir", "en": "to measure", "level": "C1", "category": "verbs"},
+{"es": "cuantificar", "en": "to quantify", "level": "C1", "category": "verbs"},
+{"es": "cotejar", "en": "to collate/compare", "level": "C1", "category": "verbs"},
+{"es": "escudriñar", "en": "to scrutinize", "level": "C1", "category": "verbs"},
+{"es": "develar", "en": "to unveil", "level": "C1", "category": "verbs"},
+{"es": "desentrañar", "en": "to unravel", "level": "C1", "category": "verbs"},
+{"es": "erigir", "en": "to erect", "level": "C1", "category": "verbs"},
+{"es": "forjar", "en": "to forge", "level": "C1", "category": "verbs"},
+{"es": "esculpir", "en": "to sculpt", "level": "C1", "category": "verbs"},
+{"es": "bosquejar", "en": "to sketch", "level": "C1", "category": "verbs"},
+{"es": "perfilar", "en": "to outline/profile", "level": "C1", "category": "verbs"},
+{"es": "atemperar", "en": "to moderate", "level": "C1", "category": "verbs"},
+{"es": "mitigar", "en": "to mitigate", "level": "C1", "category": "verbs"},
+{"es": "palear", "en": "to shovel", "level": "C1", "category": "verbs"},
+{"es": "suscitar", "en": "to provoke/arouse", "level": "C1", "category": "verbs"},
+{"es": "propiciar", "en": "to foster", "level": "C1", "category": "verbs"},
+{"es": "prohijar", "en": "to adopt (an idea)", "level": "C1", "category": "verbs"},
+{"es": "fomentar", "en": "to promote", "level": "C1", "category": "verbs"},
+{"es": "coadyuvar", "en": "to contribute/assist", "level": "C1", "category": "verbs"},
+{"es": "conllevar", "en": "to entail", "level": "C1", "category": "verbs"},
+{"es": "acaecer", "en": "to happen (formal)", "level": "C1", "category": "verbs"},
+{"es": "sobrevenir", "en": "to occur unexpectedly", "level": "C1", "category": "verbs"},
+{"es": "yacer", "en": "to lie (as in rest)", "level": "C1", "category": "verbs"},
+{"es": "pervadir", "en": "to pervade", "level": "C1", "category": "verbs"},
+{"es": "transgredir", "en": "to transgress", "level": "C1", "category": "verbs"},
+{"es": "ultrajar", "en": "to outrage", "level": "C1", "category": "verbs"},
+{"es": "denostar", "en": "to vilify", "level": "C1", "category": "verbs"},
+{"es": "ensalzar", "en": "to praise highly", "level": "C1", "category": "verbs"},
+{"es": "ensombrecer", "en": "to darken", "level": "C1", "category": "verbs"},
+{"es": "atemorizar", "en": "to intimidate", "level": "C1", "category": "verbs"},
+{"es": "desestimar", "en": "to dismiss", "level": "C1", "category": "verbs"},
+{"es": "desairar", "en": "to snub", "level": "C1", "category": "verbs"},
+{"es": "atemperar", "en": "to attune", "level": "C1", "category": "verbs"},
+{"es": "conciliar", "en": "to reconcile", "level": "C1", "category": "verbs"},
+{"es": "amparar", "en": "to protect/shelter", "level": "C1", "category": "verbs"},
+{"es": "subvenir", "en": "to provide for", "level": "C1", "category": "verbs"},
+{"es": "sustentar", "en": "to sustain", "level": "C1", "category": "verbs"},  
+
+        //OBJETOS   
+        // Objetos A1 cotidianos
+        {"es": "casa", "en": "house", "level": "A1", "category": "objects"},
+{"es": "mesa", "en": "table", "level": "A1", "category": "objects"},
+{"es": "silla", "en": "chair", "level": "A1", "category": "objects"},
+{"es": "puerta", "en": "door", "level": "A1", "category": "objects"},
+{"es": "ventana", "en": "window", "level": "A1", "category": "objects"},
+{"es": "cama", "en": "bed", "level": "A1", "category": "objects"},
+{"es": "libro", "en": "book", "level": "A1", "category": "objects"},
+{"es": "bolígrafo", "en": "pen", "level": "A1", "category": "objects"},
+{"es": "papel", "en": "paper", "level": "A1", "category": "objects"},
+{"es": "comida", "en": "food", "level": "A1", "category": "objects"},
+{"es": "agua", "en": "water", "level": "A1", "category": "objects"},
+{"es": "vaso", "en": "glass", "level": "A1", "category": "objects"},
+{"es": "plato", "en": "plate", "level": "A1", "category": "objects"},
+{"es": "teléfono", "en": "phone", "level": "A1", "category": "objects"},
+{"es": "dinero", "en": "money", "level": "A1", "category": "objects"},
+{"es": "tienda", "en": "shop", "level": "A1", "category": "objects"},
+{"es": "calle", "en": "street", "level": "A1", "category": "objects"},
+{"es": "coche", "en": "car", "level": "A1", "category": "objects"},
+{"es": "ordenador", "en": "computer", "level": "A1", "category": "objects"},
+{"es": "reloj", "en": "watch/clock", "level": "A1", "category": "objects"},
+//Nivel A2 (Objetos de la Vida Diaria y Personal)
+{"es": "maleta", "en": "suitcase", "level": "A2", "category": "objects"},
+{"es": "regalo", "en": "gift", "level": "A2", "category": "objects"},
+{"es": "llave", "en": "key", "level": "A2", "category": "objects"},
+{"es": "foto", "en": "photo", "level": "A2", "category": "objects"},
+{"es": "carta", "en": "letter", "level": "A2", "category": "objects"},
+{"es": "flor", "en": "flower", "level": "A2", "category": "objects"},
+{"es": "árbol", "en": "tree", "level": "A2", "category": "objects"},
+{"es": "sol", "en": "sun", "level": "A2", "category": "objects"},
+{"es": "luna", "en": "moon", "level": "A2", "category": "objects"},
+{"es": "billete", "en": "bill/ticket", "level": "A2", "category": "objects"},
+{"es": "moneda", "en": "coin", "level": "A2", "category": "objects"},
+{"es": "recibo", "en": "receipt", "level": "A2", "category": "objects"},
+{"es": "equipaje", "en": "luggage", "level": "A2", "category": "objects"},
+{"es": "mapa", "en": "map", "level": "A2", "category": "objects"},
+{"es": "periódico", "en": "newspaper", "level": "A2", "category": "objects"},
+{"es": "revista", "en": "magazine", "level": "A2", "category": "objects"},
+{"es": "radio", "en": "radio", "level": "A2", "category": "objects"},
+{"es": "televisión", "en": "television", "level": "A2", "category": "objects"},
+{"es": "cámara", "en": "camera", "level": "A2", "category": "objects"},
+{"es": "batería", "en": "battery", "level": "A2", "category": "objects"},
+//Nivel B1 (Objetos de Contextos Específicos y Abstractos) 
+{"es": "contrato", "en": "contract", "level": "B1", "category": "objects"},
+{"es": "documento", "en": "document", "level": "B1", "category": "objects"},
+{"es": "prueba", "en": "proof/test", "level": "B1", "category": "objects"},
+{"es": "consejo", "en": "advice", "level": "B1", "category": "objects"},
+{"es": "oportunidad", "en": "opportunity", "level": "B1", "category": "objects"},
+{"es": "experiencia", "en": "experience", "level": "B1", "category": "objects"},
+{"es": "recuerdo", "en": "memory/souvenir", "level": "B1", "category": "objects"},
+{"es": "edificio", "en": "building", "level": "B1", "category": "objects"},
+{"es": "aparato", "en": "device", "level": "B1", "category": "objects"},
+{"es": "herramienta", "en": "tool", "level": "B1", "category": "objects"},
+{"es": "material", "en": "material", "level": "B1", "category": "objects"},
+{"es": "producto", "en": "product", "level": "B1", "category": "objects"},
+{"es": "artículo", "en": "article", "level": "B1", "category": "objects"},
+{"es": "paquete", "en": "package", "level": "B1", "category": "objects"},
+{"es": "caja", "en": "box", "level": "B1", "category": "objects"},
+{"es": "contenedor", "en": "container", "level": "B1", "category": "objects"},
+{"es": "objetivo", "en": "objective/target", "level": "B1", "category": "objects"},
+{"es": "meta", "en": "goal", "level": "B1", "category": "objects"},
+{"es": "proyecto", "en": "project", "level": "B1", "category": "objects"},
+{"es": "sistema", "en": "system", "level": "B1", "category": "objects"},
+//Nivel B2 (Objetos Abstractos y de Ámbitos Especializados)
+{"es": "dispositivo", "en": "device", "level": "B2", "category": "objects"},
+{"es": "equipo", "en": "equipment/team", "level": "B2", "category": "objects"},
+{"es": "instalación", "en": "facility", "level": "B2", "category": "objects"},
+{"es": "infraestructura", "en": "infrastructure", "level": "B2", "category": "objects"},
+{"es": "marco", "en": "framework", "level": "B2", "category": "objects"},
+{"es": "estructura", "en": "structure", "level": "B2", "category": "objects"},
+{"es": "red", "en": "network", "level": "B2", "category": "objects"},
+{"es": "versión", "en": "version", "level": "B2", "category": "objects"},
+{"es": "aspecto", "en": "aspect", "level": "B2", "category": "objects"},
+{"es": "elemento", "en": "element", "level": "B2", "category": "objects"},
+{"es": "factor", "en": "factor", "level": "B2", "category": "objects"},
+{"es": "volumen", "en": "volume", "level": "B2", "category": "objects"},
+{"es": "área", "en": "area", "level": "B2", "category": "objects"},
+{"es": "sector", "en": "sector", "level": "B2", "category": "objects"},
+{"es": "mercado", "en": "market", "level": "B2", "category": "objects"},
+{"es": "patrimonio", "en": "heritage/estate", "level": "B2", "category": "objects"},
+{"es": "recurso", "en": "resource", "level": "B2", "category": "objects"},
+{"es": "origen", "en": "origin", "level": "B2", "category": "objects"},
+{"es": "destino", "en": "destination", "level": "B2", "category": "objects"},
+{"es": "alcance", "en": "scope/reach", "level": "B2", "category": "objects"},
+//Nivel C1 (Objetos de Alta Abstracción y Especialización)
+{"es": "paradigma", "en": "paradigm", "level": "C1", "category": "objects"},
+{"es": "contexto", "en": "context", "level": "C1", "category": "objects"},
+{"es": "entorno", "en": "environment", "level": "C1", "category": "objects"},
+{"es": "planteamiento", "en": "approach", "level": "C1", "category": "objects"},
+{"es": "razonamiento", "en": "reasoning", "level": "C1", "category": "objects"},
+{"es": "premisa", "en": "premise", "level": "C1", "category": "objects"},
+{"es": "hipótesis", "en": "hypothesis", "level": "C1", "category": "objects"},
+{"es": "tesis", "en": "thesis", "level": "C1", "category": "objects"},
+{"es": "axioma", "en": "axiom", "level": "C1", "category": "objects"},
+{"es": "protocolo", "en": "protocol", "level": "C1", "category": "objects"},
+{"es": "mecanismo", "en": "mechanism", "level": "C1", "category": "objects"},
+{"es": "procedimiento", "en": "procedure", "level": "C1", "category": "objects"},
+{"es": "metodología", "en": "methodology", "level": "C1", "category": "objects"},
+{"es": "herramienta", "en": "tool (abstract)", "level": "C1", "category": "objects"},
+{"es": "instrumento", "en": "instrument", "level": "C1", "category": "objects"},
+{"es": "discurso", "en": "discourse", "level": "C1", "category": "objects"},
+{"es": "narrativa", "en": "narrative", "level": "C1", "category": "objects"},
+{"es": "relato", "en": "account/story", "level": "C1", "category": "objects"},
+{"es": "legado", "en": "legacy", "level": "C1", "category": "objects"},
+{"es": "efecto", "en": "effect", "level": "C1", "category": "objects"},
+
+        //COMIDA       
+        // Comida
+        {"es": "manzana", "en": "apple", "level": "A1", "category": "food"},
+        {"es": "pan", "en": "bread", "level": "A1", "category": "food"},
+        {"es": "agua", "en": "water", "level": "A1", "category": "food"},
+        {"es": "leche", "en": "milk", "level": "A1", "category": "food"},
+        {"es": "arroz", "en": "rice", "level": "A1", "category": "food"},
+        {"es": "pollo", "en": "chicken", "level": "A2", "category": "food"},
+        {"es": "pescado", "en": "fish", "level": "A2", "category": "food"},
+        {"es": "verduras", "en": "vegetables", "level": "A2", "category": "food"},
+        
+        // Adjetivos
+        {"es": "grande", "en": "big", "level": "A1", "category": "adjectives"},
+        {"es": "pequeño", "en": "small", "level": "A1", "category": "adjectives"},
+        {"es": "alto", "en": "tall", "level": "A1", "category": "adjectives"},
+        {"es": "bajo", "en": "short", "level": "A1", "category": "adjectives"},
+        {"es": "feliz", "en": "happy", "level": "A1", "category": "adjectives"},
+        {"es": "triste", "en": "sad", "level": "A1", "category": "adjectives"},
+        {"es": "inteligente", "en": "smart", "level": "A2", "category": "adjectives"},
+        {"es": "interesante", "en": "interesting", "level": "A2", "category": "adjectives"},
+        {"es": "difícil", "en": "difficult", "level": "A2", "category": "adjectives"}
+      ],
+      filteredWords: [],
+      currentWord: {},
+      score: 0,
+      streak: 0,
+      correctAnswers: 0,
+      incorrectAnswers: 0,
+      level: localStorage.getItem("level") || "A1",
+      category: localStorage.getItem("category") || "all",
+      direction: localStorage.getItem("direction") || "es-en",
+      mode: "practice",
+      userLevel: parseInt(localStorage.getItem("userLevel")) || 1,
+      xp: parseInt(localStorage.getItem("xp")) || 0,
+      xpNeeded: 100,
+      achievements: JSON.parse(localStorage.getItem("achievements")) || {
+        "10streak": false,
+        "50correct": false,
+        "perfect": false
+      },
+      reviewWords: JSON.parse(localStorage.getItem("reviewWords")) || [],
+      soundEnabled: localStorage.getItem("soundEnabled") !== "false",
+      darkMode: localStorage.getItem("darkMode") === "true",
+      exam: {
+        inProgress: false,
+        totalQuestions: 20,
+        currentQuestion: 0,
+        correct: 0,
+        startTime: 0,
+        endTime: 0
+      },
+      timer: null,
+      timeLeft: 10
+    };
+
+    // ===== Inicialización =====
+    function init() {
+      // Configurar modo oscuro si está activado
+      if (gameState.darkMode) {
+        document.body.classList.add("dark-mode");
+      }
+      
+      // Configurar sonido
+      document.getElementById("sound-toggle").innerHTML = gameState.soundEnabled ? 
+        '<i class="fas fa-volume-up"></i>' : '<i class="fas fa-volume-mute"></i>';
+      
+      // Cargar leaderboard
+      updateLeaderboard();
+      
+      // Configurar event listeners
+      document.getElementById("answer").addEventListener("keydown", function(e) {
+        if (e.key === "Enter") checkAnswer();
+      });
+      
+      // Configurar selectores de categoría
+      document.querySelectorAll(".category-item").forEach(item => {
+        item.addEventListener("click", function() {
+          document.querySelectorAll(".category-item").forEach(i => i.style.opacity = "0.7");
+          this.style.opacity = "1";
+          gameState.category = this.getAttribute("data-category");
+          localStorage.setItem("category", gameState.category);
+        });
+      });
+      
+      // Configurar selector de modo
+      document.querySelectorAll(".mode-btn").forEach(btn => {
+        btn.addEventListener("click", function() {
+          document.querySelectorAll(".mode-btn").forEach(b => b.classList.remove("active"));
+          this.classList.add("active");
+          gameState.mode = this.getAttribute("data-mode");
+        });
+      });
+      
+      // Configurar dirección de traducción
+      document.getElementById("translation-direction").value = gameState.direction;
+      document.getElementById("translation-direction").addEventListener("change", function() {
+        gameState.direction = this.value;
+        localStorage.setItem("direction", gameState.direction);
+      });
+      
+      // Configurar nivel
+      document.getElementById("level").value = gameState.level;
+      document.getElementById("level").addEventListener("change", function() {
+        gameState.level = this.value;
+        localStorage.setItem("level", gameState.level);
+      });
+      
+      // Actualizar logros
+      updateAchievements();
+    }
+
+    // ===== Funciones de pantalla =====
+    function showScreen(screenId) {
+      document.querySelectorAll(".screen").forEach(screen => {
+        screen.classList.remove("active");
+      });
+      document.getElementById(screenId).classList.add("active");
+    }
+
+    // ===== Funciones del juego =====
+    function startGame() {
+      // Configurar modo de juego
+      gameState.mode = document.querySelector(".mode-btn.active").getAttribute("data-mode");
+      gameState.exam.inProgress = gameState.mode === "exam";
+      
+      if (gameState.exam.inProgress) {
+        gameState.exam.currentQuestion = 0;
+        gameState.exam.correct = 0;
+        gameState.exam.startTime = Date.now();
+        document.getElementById("exam-stats").style.display = "block";
+        document.getElementById("exam-progress").textContent = "0";
+      } else {
+        document.getElementById("exam-stats").style.display = "none";
+      }
+      
+      // Reiniciar estadísticas
+      gameState.score = 0;
+      gameState.streak = 0;
+      gameState.correctAnswers = 0;
+      gameState.incorrectAnswers = 0;
+      
+      // Filtrar palabras
+      filterWords();
+      
+      // Mostrar pantalla de juego
+      showScreen("game-screen");
+      
+      // Actualizar UI
+      updateUI();
+      
+      // Iniciar nueva palabra
+      newWord();
+      
+      // Iniciar timer si es modo examen
+      if (gameState.mode === "exam") {
+        startTimer();
+      }
+    }
+
+    function filterWords() {
+      gameState.filteredWords = gameState.words.filter(word => {
+        const levelMatch = gameState.level === "all" || word.level === gameState.level;
+        const categoryMatch = gameState.category === "all" || word.category === gameState.category;
+        return levelMatch && categoryMatch;
+      });
+      
+      // Actualizar displays
+      document.getElementById("level-display").textContent = `Nivel: ${gameState.level}`;
+      document.getElementById("category-display").textContent = ` | Categoría: ${getCategoryName(gameState.category)}`;
+      document.getElementById("game-mode-indicator").textContent = `Modo: ${gameState.mode === "exam" ? "Examen" : "Práctica"}`;
+    }
+
+    function getCategoryName(category) {
+      const categories = {
+        "all": "Todas",
+        "animals": "Animales",
+        "verbs": "Verbos",
+        "objects": "Objetos",
+        "food": "Comida",
+        "adjectives": "Adjetivos"
+      };
+      return categories[category] || category;
+    }
+
+    function newWord() {
+      if (gameState.filteredWords.length === 0) {
+        document.getElementById("word").textContent = "No hay palabras en esta categoría/nivel";
+        return;
+      }
+      
+      gameState.currentWord = gameState.filteredWords[Math.floor(Math.random() * gameState.filteredWords.length)];
+      
+      // Mostrar palabra según la dirección de traducción
+      if (gameState.direction === "es-en") {
+        document.getElementById("word").textContent = gameState.currentWord.es;
+      } else {
+        document.getElementById("word").textContent = gameState.currentWord.en;
+      }
+      
+      document.getElementById("answer").value = "";
+      document.getElementById("feedback").textContent = "";
+      document.getElementById("feedback").className = "feedback";
+      
+      // Reiniciar timer
+      if (gameState.mode === "exam") {
+        resetTimer();
+      }
+    }
+
+    function checkAnswer() {
+      const userAnswer = document.getElementById("answer").value.trim().toLowerCase();
+      const feedback = document.getElementById("feedback");
+      
+      let correctAnswer;
+      if (gameState.direction === "es-en") {
+        correctAnswer = gameState.currentWord.en.toLowerCase();
+      } else {
+        correctAnswer = gameState.currentWord.es.toLowerCase();
+      }
+      
+      if (userAnswer === correctAnswer) {
+        // Respuesta correcta
+        gameState.score += 10;
+        gameState.streak++;
+        gameState.correctAnswers++;
+        
+        // Bonus por racha
+        if (gameState.streak % 5 === 0) {
+          gameState.score += 10;
+        }
+        
+        // Bonus por tiempo en modo examen
+        if (gameState.mode === "exam" && gameState.timeLeft > 5) {
+          gameState.score += 5;
+        }
+        
+        feedback.textContent = "✅ ¡Correcto!";
+        feedback.className = "feedback correct";
+        
+        // Añadir XP
+        addXP(10);
+        
+        // Reproducir sonido
+        if (gameState.soundEnabled) {
+          document.getElementById("correct-sound").play();
+        }
+        
+        // Comprobar logros
+        checkAchievements();
+      } else {
+        // Respuesta incorrecta
+        gameState.streak = 0;
+        gameState.incorrectAnswers++;
+        
+        feedback.textContent = `❌ Era: ${correctAnswer}`;
+        feedback.className = "feedback incorrect";
+        
+        // Añadir palabra a la lista de revisión si no está ya
+        if (!gameState.reviewWords.some(w => w.es === gameState.currentWord.es)) {
+          gameState.reviewWords.push(gameState.currentWord);
+          localStorage.setItem("reviewWords", JSON.stringify(gameState.reviewWords));
+        }
+        
+        // Reproducir sonido
+        if (gameState.soundEnabled) {
+          document.getElementById("incorrect-sound").play();
+        }
+      }
+      
+      // Actualizar UI
+      updateUI();
+      updateReviewList();
+      
+      // Para modo examen
+      if (gameState.exam.inProgress) {
+        gameState.exam.currentQuestion++;
+        document.getElementById("exam-progress").textContent = gameState.exam.currentQuestion;
+        
+        if (gameState.exam.currentQuestion >= gameState.exam.totalQuestions) {
+          // Examen terminado
+          gameState.exam.endTime = Date.now();
+          gameState.exam.correct = gameState.correctAnswers;
+          showExamResults();
+          return;
+        }
+      }
+      
+      // Siguiente palabra después de un breve delay
+      setTimeout(newWord, 1500);
+    }
+
+    function addXP(amount) {
+      gameState.xp += amount;
+      
+      // Subir de nivel
+      if (gameState.xp >= gameState.xpNeeded) {
+        gameState.userLevel++;
+        gameState.xp -= gameState.xpNeeded;
+        gameState.xpNeeded = Math.floor(gameState.xpNeeded * 1.2); // Aumentar XP necesario para siguiente nivel
+        
+        // Reproducir sonido de subida de nivel
+        if (gameState.soundEnabled) {
+          document.getElementById("levelup-sound").play();
+        }
+      }
+      
+      // Guardar en localStorage
+      localStorage.setItem("userLevel", gameState.userLevel);
+      localStorage.setItem("xp", gameState.xp);
+      
+      // Actualizar UI
+      updateXPBar();
+    }
+
+    function updateUI() {
+      document.getElementById("score").textContent = gameState.score;
+      document.getElementById("streak").textContent = gameState.streak;
+      document.getElementById("correct").textContent = gameState.correctAnswers;
+      document.getElementById("incorrect").textContent = gameState.incorrectAnswers;
+      document.getElementById("user-level").textContent = gameState.userLevel;
+      document.getElementById("xp-text").textContent = `${gameState.xp}/${gameState.xpNeeded} XP`;
+      
+      updateXPBar();
+    }
+
+    function updateXPBar() {
+      const percentage = (gameState.xp / gameState.xpNeeded) * 100;
+      document.getElementById("xp-bar").style.width = `${percentage}%`;
+    }
+
+    function updateReviewList() {
+      const reviewList = document.getElementById("review-list");
+      
+      if (gameState.reviewWords.length === 0) {
+        reviewList.innerHTML = "<p>No hay palabras para revisar todavía</p>";
+        return;
+      }
+      
+      reviewList.innerHTML = "";
+      gameState.reviewWords.forEach(word => {
+        const item = document.createElement("div");
+        item.className = "review-item";
+        item.innerHTML = `
+          <span>${word.es} - ${word.en}</span>
+          <button class="btn" onclick="removeReviewWord('${word.es}')"><i class="fas fa-times"></i></button>
+        `;
+        reviewList.appendChild(item);
+      });
+    }
+
+    function removeReviewWord(wordEs) {
+      gameState.reviewWords = gameState.reviewWords.filter(w => w.es !== wordEs);
+      localStorage.setItem("reviewWords", JSON.stringify(gameState.reviewWords));
+      updateReviewList();
+    }
+
+    // ===== Sistema de logros =====
+    function checkAchievements() {
+      // Logro: Racha de 10
+      if (gameState.streak >= 10 && !gameState.achievements["10streak"]) {
+        gameState.achievements["10streak"] = true;
+        document.getElementById("achievement-10-streak").classList.add("unlocked");
+      }
+      
+      // Logro: 50 respuestas correctas
+      if (gameState.correctAnswers >= 50 && !gameState.achievements["50correct"]) {
+        gameState.achievements["50correct"] = true;
+        document.getElementById("achievement-50-correct").classList.add("unlocked");
+      }
+      
+      // Guardar logros
+      localStorage.setItem("achievements", JSON.stringify(gameState.achievements));
+    }
+
+    function updateAchievements() {
+      if (gameState.achievements["10streak"]) {
+        document.getElementById("achievement-10-streak").classList.add("unlocked");
+      }
+      if (gameState.achievements["50correct"]) {
+        document.getElementById("achievement-50-correct").classList.add("unlocked");
+      }
+      if (gameState.achievements["perfect"]) {
+        document.getElementById("achievement-perfect").classList.add("unlocked");
+      }
+    }
+
+    // ===== Sistema de leaderboard =====
+    function updateLeaderboard() {
+      let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+      const tbody = document.getElementById("leaderboard-body");
+      
+      // Ordenar por puntuación (descendente)
+      leaderboard.sort((a, b) => b.score - a.score);
+      
+      tbody.innerHTML = "";
+      leaderboard.forEach((entry, index) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${index + 1}</td>
+          <td>${entry.name}</td>
+          <td>${entry.score}</td>
+          <td>${entry.level}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function saveToLeaderboard() {
+      let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+      const name = prompt("¡Felicidades! Ingresa tu nombre para el leaderboard:");
+      
+      if (name) {
+        leaderboard.push({
+          name: name,
+          score: gameState.score,
+          level: gameState.userLevel
+        });
+        
+        localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+        updateLeaderboard();
+      }
+    }
+
+    // ===== Modo Examen =====
+    function startTimer() {
+      gameState.timeLeft = 10;
+      document.getElementById("timer-container").style.display = "block";
+      resetTimer();
+    }
+
+    function resetTimer() {
+      gameState.timeLeft = 10;
+      document.getElementById("timer-bar").style.width = "100%";
+      document.getElementById("timer-bar").style.transition = "width 1s linear";
+      
+      clearInterval(gameState.timer);
+      gameState.timer = setInterval(() => {
+        gameState.timeLeft--;
+        document.getElementById("timer-bar").style.width = `${(gameState.timeLeft / 10) * 100}%`;
+        
+        if (gameState.timeLeft <= 0) {
+          clearInterval(gameState.timer);
+          checkAnswer(); // Tiempo agotado, considerar respuesta incorrecta
+        }
+      }, 1000);
+    }
+
+    function showExamResults() {
+      const score = gameState.exam.correct;
+      const total = gameState.exam.totalQuestions;
+      const timeTaken = Math.floor((gameState.exam.endTime - gameState.exam.startTime) / 1000);
+      const minutes = Math.floor(timeTaken / 60);
+      const seconds = timeTaken % 60;
+      
+      document.getElementById("exam-score").textContent = `Puntuación: ${score}/${total}`;
+      document.getElementById("exam-time").textContent = `Tiempo: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      
+      // Calificar
+      let grade;
+      if (score >= 18) grade = "¡Excelente! 🎉";
+      else if (score >= 15) grade = "Muy bien 👍";
+      else if (score >= 12) grade = "Bien 👌";
+      else if (score >= 9) grade = "Aprobado ✅";
+      else grade = "Necesitas mejorar ❌";
+      
+      document.getElementById("exam-grade").textContent = `Calificación: ${grade}`;
+      
+      // Mostrar palabras falladas
+      const reviewList = document.getElementById("exam-review-list");
+      if (gameState.reviewWords.length === 0) {
+        reviewList.innerHTML = "<p>¡Perfecto! No has fallado ninguna palabra</p>";
+      } else {
+        reviewList.innerHTML = "";
+        gameState.reviewWords.forEach(word => {
+          const item = document.createElement("div");
+          item.className = "review-item";
+          item.textContent = `${word.es} - ${word.en}`;
+          reviewList.appendChild(item);
+        });
+      }
+      
+      showScreen("exam-results-screen");
+      
+      // Guardar en leaderboard si la puntuación es buena
+      if (score >= 15) {
+        saveToLeaderboard();
+      }
+    }
+
+    // ===== Configuración =====
+    function toggleSound() {
+      gameState.soundEnabled = !gameState.soundEnabled;
+      localStorage.setItem("soundEnabled", gameState.soundEnabled);
+      
+      document.getElementById("sound-toggle").innerHTML = gameState.soundEnabled ? 
+        '<i class="fas fa-volume-up"></i>' : '<i class="fas fa-volume-mute"></i>';
+    }
+
+    function toggleDarkMode() {
+      gameState.darkMode = !gameState.darkMode;
+      localStorage.setItem("darkMode", gameState.darkMode);
+      
+      if (gameState.darkMode) {
+        document.body.classList.add("dark-mode");
+      } else {
+        document.body.classList.remove("dark-mode");
+      }
+    }
+
+    // Inicializar juego cuando se carga la página
+    window.onload = init;
+  </script>
+</body>
+</html>
