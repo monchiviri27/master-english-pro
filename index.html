@@ -7,27 +7,31 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --primary: #4CAF50;
-      --primary-dark: #388E3C;
-      --secondary: #2196F3;
-      --danger: #f44336;
-      --warning: #ff9800;
-      --info: #00bcd4;
+      --primary: #FFCC00;
+      --primary-dark: #E6B800;
+      --secondary: #6C5CE7;
+      --accent: #00B894;
+      --danger: #D63031;
+      --warning: #FDCB6E;
+      --info: #0984E3;
       --light: #f8f9fa;
-      --dark: #212121;
-      --background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
-      --card-bg: #fff;
-      --text-color: #333;
-      --border-radius: 20px;
-      --shadow: 0 8px 25px rgba(0,0,0,0.2);
+      --dark: #2D3436;
+      --background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      --card-bg: #ffffff;
+      --text-color: #2D3436;
+      --border-radius: 16px;
+      --shadow: 0 10px 30px rgba(0,0,0,0.15);
       --transition: all 0.3s ease;
+      --gold-gradient: linear-gradient(135deg, #FFCC00 0%, #D4AF37 100%);
+      --royal-gradient: linear-gradient(135deg, #6C5CE7 0%, #4A3FCF 100%);
+      --crown-gradient: linear-gradient(135deg, #FFCC00 0%, #F9A602 100%);
     }
 
     .dark-mode {
       --background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
-      --card-bg: #2d3748;
-      --text-color: #e2e8f0;
-      --shadow: 0 8px 25px rgba(0,0,0,0.5);
+      --card-bg: #2D3436;
+      --text-color: #f5f7fa;
+      --shadow: 0 10px 30px rgba(0,0,0,0.4);
     }
 
     * {
@@ -37,7 +41,7 @@
     }
 
     body {
-      font-family: "Segoe UI", Roboto, sans-serif;
+      font-family: "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
       text-align: center;
       background: var(--background);
       margin: 0;
@@ -71,22 +75,42 @@
     }
 
     .btn {
-      padding: 10px 15px;
+      padding: 12px 18px;
       font-size: 14px;
+      font-weight: 600;
       cursor: pointer;
       border: none;
       border-radius: 12px;
-      background: var(--primary);
+      background: var(--royal-gradient);
       color: white;
       transition: var(--transition);
       display: flex;
       align-items: center;
       gap: 5px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0));
+      transform: rotate(30deg);
+      transition: var(--transition);
     }
 
     .btn:hover {
-      opacity: 0.9;
-      transform: translateY(-2px);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+
+    .btn:hover::after {
+      transform: rotate(30deg) translate(10%, 10%);
     }
 
     .btn-secondary {
@@ -99,6 +123,7 @@
 
     .btn-warning {
       background: var(--warning);
+      color: var(--dark);
     }
 
     .card {
@@ -110,6 +135,18 @@
       animation: fadeIn 0.8s ease;
       position: relative;
       overflow: hidden;
+      border: 2px solid rgba(255,255,255,0.2);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: var(--gold-gradient);
+      border-radius: var(--border-radius) var(--border-radius) 0 0;
     }
 
     @keyframes fadeIn {
@@ -122,66 +159,101 @@
       color: var(--text-color);
     }
 
+    h1 {
+      font-size: 2.5rem;
+      background: var(--crown-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+
     select, input {
-      padding: 12px;
+      padding: 14px;
       font-size: 16px;
       margin-top: 15px;
       width: 100%;
       max-width: 300px;
       border-radius: 12px;
-      border: 1px solid #ccc;
+      border: 2px solid #ddd;
       outline: none;
       transition: var(--transition);
       background: var(--card-bg);
       color: var(--text-color);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
     }
 
     input:focus, select:focus {
-      border: 1px solid var(--primary);
+      border: 2px solid var(--primary);
+      box-shadow: 0 0 0 3px rgba(255, 204, 0, 0.2);
     }
 
     .game-button {
       margin-top: 20px;
-      padding: 12px 25px;
-      font-size: 16px;
+      padding: 16px 32px;
+      font-size: 18px;
+      font-weight: bold;
       cursor: pointer;
       border: none;
-      border-radius: 12px;
-      background: var(--primary);
-      color: white;
+      border-radius: 16px;
+      background: var(--gold-gradient);
+      color: #2D3436;
       transition: var(--transition);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .game-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0));
+      clip-path: polygon(0 0, 100% 0, 100% 70%, 0 100%);
     }
 
     .game-button:hover {
-      background: var(--primary-dark);
-      transform: scale(1.05);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
     }
 
     #word {
-      font-size: 32px;
-      margin: 20px 0;
+      font-size: 36px;
+      margin: 25px 0;
       font-weight: bold;
       color: var(--text-color);
-      min-height: 50px;
+      min-height: 60px;
       display: flex;
       align-items: center;
       justify-content: center;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      background: rgba(255, 204, 0, 0.1);
+      padding: 15px;
+      border-radius: 12px;
     }
 
     .feedback {
-      font-size: 22px;
-      margin-top: 15px;
-      min-height: 30px;
+      font-size: 24px;
+      margin-top: 20px;
+      min-height: 40px;
       font-weight: bold;
+      padding: 10px;
+      border-radius: 12px;
     }
 
     .feedback.correct {
-      color: #2ecc71;
+      color: var(--accent);
+      background: rgba(0, 184, 148, 0.1);
       animation: pop 0.3s ease;
     }
 
     .feedback.incorrect {
-      color: #e74c3c;
+      color: var(--danger);
+      background: rgba(214, 48, 49, 0.1);
       animation: shake 0.4s ease;
     }
 
@@ -200,7 +272,7 @@
     }
 
     .stats {
-      margin-top: 20px;
+      margin-top: 25px;
       font-size: 18px;
       color: var(--text-color);
       display: grid;
@@ -210,8 +282,17 @@
 
     .stat-item {
       background: rgba(0,0,0,0.05);
-      padding: 10px;
+      padding: 15px;
       border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .stat-item span {
+      font-weight: bold;
+      font-size: 20px;
     }
 
     .progress-container {
@@ -221,22 +302,25 @@
       overflow: hidden;
       margin-top: 10px;
       height: 12px;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
     }
 
     .progress-bar {
       height: 100%;
       width: 0%;
-      background: var(--primary);
+      background: var(--accent);
       transition: width 0.3s ease;
+      border-radius: 10px;
     }
 
     .timer-container {
       width: 100%;
-      height: 8px;
+      height: 10px;
       background: #eee;
-      border-radius: 4px;
-      margin: 15px 0;
+      border-radius: 5px;
+      margin: 20px 0;
       overflow: hidden;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
     }
 
     .timer-bar {
@@ -244,33 +328,37 @@
       width: 100%;
       background: var(--info);
       transition: width 1s linear;
+      border-radius: 5px;
     }
 
     .achievements {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 15px;
       justify-content: center;
-      margin: 20px 0;
+      margin: 25px 0;
     }
 
     .achievement {
-      width: 50px;
-      height: 50px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
       background: var(--warning);
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
-      font-size: 20px;
+      font-size: 24px;
       opacity: 0.3;
       transition: var(--transition);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border: 2px solid rgba(255,255,255,0.5);
     }
 
     .achievement.unlocked {
       opacity: 1;
       transform: scale(1.1);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
     }
 
     .screen {
@@ -291,31 +379,50 @@
     .category-item {
       padding: 20px;
       border-radius: 12px;
-      background: var(--primary);
+      background: var(--royal-gradient);
       color: white;
       cursor: pointer;
       transition: var(--transition);
+      font-weight: 600;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .category-item::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0));
+      transform: rotate(30deg);
     }
 
     .category-item:hover {
       transform: translateY(-5px);
-      opacity: 0.9;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
     }
 
     .leaderboard {
       width: 100%;
       border-collapse: collapse;
       margin: 20px 0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
 
     .leaderboard th, .leaderboard td {
-      padding: 12px;
+      padding: 15px;
       border-bottom: 1px solid #ddd;
     }
 
     .leaderboard th {
-      background: var(--primary);
+      background: var(--royal-gradient);
       color: white;
+      font-weight: 600;
     }
 
     .leaderboard tr:nth-child(even) {
@@ -324,21 +431,22 @@
 
     .badge {
       display: inline-block;
-      padding: 3px 8px;
-      border-radius: 12px;
+      padding: 5px 10px;
+      border-radius: 20px;
       font-size: 12px;
       font-weight: bold;
       margin-left: 5px;
-      background: var(--warning);
-      color: white;
+      background: var(--gold-gradient);
+      color: var(--dark);
     }
 
     .xp-bar {
-      height: 10px;
-      margin: 10px 0;
+      height: 12px;
+      margin: 15px 0;
       background: #e0e0e0;
-      border-radius: 5px;
+      border-radius: 6px;
       overflow: hidden;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
     }
 
     .xp-progress {
@@ -346,6 +454,7 @@
       background: var(--info);
       width: 0%;
       transition: width 0.5s ease;
+      border-radius: 6px;
     }
 
     .review-list {
@@ -353,16 +462,17 @@
       max-height: 200px;
       overflow-y: auto;
       margin: 20px 0;
-      padding: 10px;
+      padding: 15px;
       background: rgba(0,0,0,0.05);
       border-radius: 12px;
     }
 
     .review-item {
-      padding: 8px;
+      padding: 10px;
       border-bottom: 1px solid #ddd;
       display: flex;
       justify-content: space-between;
+      align-items: center;
     }
 
     .review-item:last-child {
@@ -377,25 +487,163 @@
     }
 
     .mode-btn {
-      padding: 10px 20px;
+      padding: 12px 24px;
       border-radius: 12px;
       cursor: pointer;
       background: #e0e0e0;
       transition: var(--transition);
+      font-weight: 600;
+      flex: 1;
+      max-width: 200px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
     .mode-btn.active {
-      background: var(--primary);
+      background: var(--royal-gradient);
       color: white;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
     }
 
-    @media (max-width: 600px) {
+    /* Efectos de medallas para las primeras posiciones */
+    .leaderboard tr:first-child {
+      background: linear-gradient(90deg, rgba(255, 215, 0, 0.2) 0%, transparent 100%);
+    }
+
+    .leaderboard tr:nth-child(2) {
+      background: linear-gradient(90deg, rgba(192, 192, 192, 0.2) 0%, transparent 100%);
+    }
+
+    .leaderboard tr:nth-child(3) {
+      background: linear-gradient(90deg, rgba(205, 127, 50, 0.2) 0%, transparent 100%);
+    }
+
+    /* Responsividad mejorada */
+    @media (max-width: 768px) {
+      .container {
+        padding: 10px;
+      }
+      
+      .card {
+        padding: 20px;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .category-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      }
+      
+      .stats {
+        grid-template-columns: 1fr 1fr;
+      }
+      
       .header {
         flex-direction: column;
       }
       
+      #word {
+        font-size: 28px;
+      }
+    }
+
+    @media (max-width: 480px) {
       .stats {
         grid-template-columns: 1fr;
+      }
+      
+      .mode-selector {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .mode-btn {
+        width: 100%;
+        max-width: none;
+      }
+      
+      .category-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      .btn {
+        padding: 10px 12px;
+        font-size: 12px;
+      }
+    }
+    
+     /* Estilos para el teclado virtual */
+    .virtual-keyboard {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #f0f0f0;
+      padding: 10px;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+    
+    .keyboard-row {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 8px;
+    }
+    
+    .keyboard-key {
+      width: 10%;
+      height: 45px;
+      margin: 0 4px;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      touch-action: manipulation;
+      user-select: none;
+    }
+    
+    .keyboard-key:active {
+      background: #e0e0e0;
+      transform: scale(0.95);
+    }
+    
+    .keyboard-space {
+      width: 40%;
+    }
+    
+    .keyboard-backspace {
+      width: 15%;
+      font-size: 22px;
+    }
+    
+    .keyboard-close {
+      width: 15%;
+      background: #ff6b6b;
+      color: white;
+    }
+    
+    .keyboard-hide {
+      transform: translateY(100%);
+    }
+    
+    /* Para dispositivos móviles */
+    @media (max-width: 768px) {
+      .virtual-keyboard {
+        display: block;
+      }
+      
+      /* Evitar zoom en inputs en iOS */
+      @media (max-width: 480px) {
+        input, select, textarea {
+          font-size: 16px !important;
+        }
       }
     }
   </style>
@@ -421,6 +669,7 @@
           <div class="category-item" data-category="objects">Objetos</div>
           <div class="category-item" data-category="food">Comida</div>
           <div class="category-item" data-category="adjectives">Adjetivos</div>
+          <div class="category-item" data-category="nouns">Sustantivos</div>
         </div>
         
         <h3>Dirección de traducción:</h3>
@@ -560,7 +809,7 @@
     // ===== Configuración y estado del juego =====
     const gameState = {
       words: [
-        // Animales
+            // Animales
         {"es": "gato", "en": "cat", "level": "A1", "category": "animals"},
   {"es": "perro", "en": "dog", "level": "A1", "category": "animals"},
   {"es": "pájaro", "en": "bird", "level": "A1", "category": "animals"},
@@ -1041,26 +1290,784 @@
 
         //COMIDA       
         // Comida
+        // A1 Alimentos fundamentales
         {"es": "manzana", "en": "apple", "level": "A1", "category": "food"},
-        {"es": "pan", "en": "bread", "level": "A1", "category": "food"},
-        {"es": "agua", "en": "water", "level": "A1", "category": "food"},
-        {"es": "leche", "en": "milk", "level": "A1", "category": "food"},
-        {"es": "arroz", "en": "rice", "level": "A1", "category": "food"},
-        {"es": "pollo", "en": "chicken", "level": "A2", "category": "food"},
-        {"es": "pescado", "en": "fish", "level": "A2", "category": "food"},
-        {"es": "verduras", "en": "vegetables", "level": "A2", "category": "food"},
-        
-        // Adjetivos
-        {"es": "grande", "en": "big", "level": "A1", "category": "adjectives"},
-        {"es": "pequeño", "en": "small", "level": "A1", "category": "adjectives"},
+{"es": "pan", "en": "bread", "level": "A1", "category": "food"},
+{"es": "agua", "en": "water", "level": "A1", "category": "food"},
+{"es": "arroz", "en": "rice", "level": "A1", "category": "food"},
+{"es": "queso", "en": "cheese", "level": "A1", "category": "food"},
+{"es": "pollo", "en": "chicken", "level": "A1", "category": "food"},
+{"es": "huevo", "en": "egg", "level": "A1", "category": "food"},
+{"es": "pescado", "en": "fish", "level": "A1", "category": "food"},
+{"es": "fruta", "en": "fruit", "level": "A1", "category": "food"},
+{"es": "carne", "en": "meat", "level": "A1", "category": "food"},
+{"es": "leche", "en": "milk", "level": "A1", "category": "food"},
+{"es": "naranja", "en": "orange", "level": "A1", "category": "food"},
+{"es": "pasta", "en": "pasta", "level": "A1", "category": "food"},
+{"es": "patata", "en": "potato", "level": "A1", "category": "food"},
+{"es": "sal", "en": "salt", "level": "A1", "category": "food"},
+{"es": "azúcar", "en": "sugar", "level": "A1", "category": "food"},
+{"es": "tomate", "en": "tomato", "level": "A1", "category": "food"},
+{"es": "verdura", "en": "vegetable", "level": "A1", "category": "food"},
+{"es": "yogur", "en": "yogurt", "level": "A1", "category": "food"},
+{"es": "plátano", "en": "banana", "level": "A1", "category": "food"},
+{"es": "cerdo", "en": "pork", "level": "A1", "category": "food"},
+{"es": "ternera", "en": "beef", "level": "A1", "category": "food"},
+{"es": "cebolla", "en": "onion", "level": "A1", "category": "food"},
+{"es": "uvas", "en": "grapes", "level": "A1", "category": "food"},
+{"es": "café", "en": "coffee", "level": "A1", "category": "food"},
+{"es": "té", "en": "tea", "level": "A1", "category": "food"},
+{"es": "zumo", "en": "juice", "level": "A1", "category": "food"},
+{"es": "ensalada", "en": "salad", "level": "A1", "category": "food"},
+{"es": "sopa", "en": "soup", "level": "A1", "category": "food"},
+{"es": "mantequilla", "en": "butter", "level": "A1", "category": "food"},
+{"es": "jamón", "en": "ham", "level": "A1", "category": "food"},
+{"es": "helado", "en": "ice cream", "level": "A1", "category": "food"},
+{"es": "pastel", "en": "cake", "level": "A1", "category": "food"},
+{"es": "galleta", "en": "cookie", "level": "A1", "category": "food"},
+{"es": "chocolate", "en": "chocolate", "level": "A1", "category": "food"},
+{"es": "aceite", "en": "oil", "level": "A1", "category": "food"},
+{"es": "vinagre", "en": "vinegar", "level": "A1", "category": "food"},
+{"es": "limón", "en": "lemon", "level": "A1", "category": "food"},
+{"es": "fresa", "en": "strawberry", "level": "A1", "category": "food"},
+{"es": "maíz", "en": "corn", "level": "A1", "category": "food"},
+{"es": "zanahoria", "en": "carrot", "level": "A1", "category": "food"},
+{"es": "pimienta", "en": "pepper", "level": "A1", "category": "food"},
+{"es": "ajo", "en": "garlic", "level": "A1", "category": "food"},
+{"es": "lechuga", "en": "lettuce", "level": "A1", "category": "food"},
+{"es": "atún", "en": "tuna", "level": "A1", "category": "food"},
+{"es": "mermelada", "en": "jam", "level": "A1", "category": "food"},
+{"es": "miel", "en": "honey", "level": "A1", "category": "food"},
+{"es": "mostaza", "en": "mustard", "level": "A1", "category": "food"},
+{"es": "mayonesa", "en": "mayonnaise", "level": "A1", "category": "food"},
+{"es": "salchicha", "en": "sausage", "level": "A1", "category": "food"},
+//A2 Nivel A2 (Básico+) - Comida Cotidiana y Preparación
+{"es": "harina", "en": "flour", "level": "A2", "category": "food"},
+{"es": "avena", "en": "oats", "level": "A2", "category": "food"},
+{"es": "almendra", "en": "almond", "level": "A2", "category": "food"},
+{"es": "nuez", "en": "walnut", "level": "A2", "category": "food"},
+{"es": "canela", "en": "cinnamon", "level": "A2", "category": "food"},
+{"es": "albahaca", "en": "basil", "level": "A2", "category": "food"},
+{"es": "perejil", "en": "parsley", "level": "A2", "category": "food"},
+{"es": "menta", "en": "mint", "level": "A2", "category": "food"},
+{"es": "pimiento", "en": "bell pepper", "level": "A2", "category": "food"},
+{"es": "brócoli", "en": "broccoli", "level": "A2", "category": "food"},
+{"es": "coliflor", "en": "cauliflower", "level": "A2", "category": "food"},
+{"es": "calabacín", "en": "zucchini", "level": "A2", "category": "food"},
+{"es": "berenjena", "en": "aubergine (UK) / eggplant (US)", "level": "A2", "category": "food"},
+{"es": "espinaca", "en": "spinach", "level": "A2", "category": "food"},
+{"es": "guisante", "en": "pea", "level": "A2", "category": "food"},
+{"es": "lenteja", "en": "lentil", "level": "A2", "category": "food"},
+{"es": "garbanzo", "en": "chickpea", "level": "A2", "category": "food"},
+{"es": "salmón", "en": "salmon", "level": "A2", "category": "food"},
+{"es": "camarón", "en": "shrimp", "level": "A2", "category": "food"},
+{"es": "mejillón", "en": "mussel", "level": "A2", "category": "food"},
+{"es": "calamar", "en": "squid", "level": "A2", "category": "food"},
+{"es": "cordero", "en": "lamb", "level": "A2", "category": "food"},
+{"es": "pavo", "en": "turkey", "level": "A2", "category": "food"},
+{"es": "salchichón", "en": "salami", "level": "A2", "category": "food"},
+{"es": "beicon", "en": "bacon", "level": "A2", "category": "food"},
+{"es": "yema", "en": "yolk", "level": "A2", "category": "food"},
+{"es": "clara", "en": "egg white", "level": "A2", "category": "food"},
+{"es": "nata", "en": "cream", "level": "A2", "category": "food"},
+{"es": "yogur griego", "en": "greek yogurt", "level": "A2", "category": "food"},
+{"es": "queso cottage", "en": "cottage cheese", "level": "A2", "category": "food"},
+{"es": "arándano", "en": "blueberry", "level": "A2", "category": "food"},
+{"es": "frambuesa", "en": "raspberry", "level": "A2", "category": "food"},
+{"es": "cereza", "en": "cherry", "level": "A2", "category": "food"},
+{"es": "piña", "en": "pineapple", "level": "A2", "category": "food"},
+{"es": "sandía", "en": "watermelon", "level": "A2", "category": "food"},
+{"es": "melón", "en": "melon", "level": "A2", "category": "food"},
+{"es": "melocotón", "en": "peach", "level": "A2", "category": "food"},
+{"es": "ciruela", "en": "plum", "level": "A2", "category": "food"},
+{"es": "albaricoque", "en": "apricot", "level": "A2", "category": "food"},
+{"es": "kiwi", "en": "kiwi", "level": "A2", "category": "food"},
+{"es": "mango", "en": "mango", "level": "A2", "category": "food"},
+{"es": "aguacate", "en": "avocado", "level": "A2", "category": "food"},
+{"es": "aceituna", "en": "olive", "level": "A2", "category": "food"},
+{"es": "pan integral", "en": "whole wheat bread", "level": "A2", "category": "food"},
+{"es": "pan tostado", "en": "toast", "level": "A2", "category": "food"},
+{"es": "cereal", "en": "cereal", "level": "A2", "category": "food"},
+{"es": "mantequilla de cacahuete", "en": "peanut butter", "level": "A2", "category": "food"},
+{"es": "mermelada de naranja", "en": "marmalade", "level": "A2", "category": "food"},
+{"es": "salsa de tomate", "en": "ketchup", "level": "A2", "category": "food"},
+{"es": "salsa", "en": "sauce", "level": "A2", "category": "food"},
+//Nivel B1 (Intermedio) - Técnicas, Platos y Sabores
+{"es": "asar", "en": "to roast", "level": "B1", "category": "food"},
+{"es": "hervir", "en": "to boil", "level": "B1", "category": "food"},
+{"es": "freír", "en": "to fry", "level": "B1", "category": "food"},
+{"es": "horneAR", "en": "to bake", "level": "B1", "category": "food"},
+{"es": "a la parrilla", "en": "grilled", "level": "B1", "category": "food"},
+{"es": "salteado", "en": "sautéed", "level": "B1", "category": "food"},
+{"es": "al vapor", "en": "steamed", "level": "B1", "category": "food"},
+{"es": "crudo", "en": "raw", "level": "B1", "category": "food"},
+{"es": "picante", "en": "spicy", "level": "B1", "category": "food"},
+{"es": "dulce", "en": "sweet", "level": "B1", "category": "food"},
+{"es": "amargo", "en": "bitter", "level": "B1", "category": "food"},
+{"es": "ácido", "en": "sour", "level": "B1", "category": "food"},
+{"es": "salado", "en": "salty", "level": "B1", "category": "food"},
+{"es": "sabroso", "en": "savory", "level": "B1", "category": "food"},
+{"es": "jugoso", "en": "juicy", "level": "B1", "category": "food"},
+{"es": "crujiente", "en": "crispy", "level": "B1", "category": "food"},
+{"es": "tierno", "en": "tender", "level": "B1", "category": "food"},
+{"es": "fibroso", "en": "fibrous", "level": "B1", "category": "food"},
+{"es": "grasoso", "en": "greasy", "level": "B1", "category": "food"},
+{"es": "rancio", "en": "rancid", "level": "B1", "category": "food"},
+{"es": "fresco", "en": "fresh", "level": "B1", "category": "food"},
+{"es": "podrido", "en": "rotten", "level": "B1", "category": "food"},
+{"es": "maduro", "en": "ripe", "level": "B1", "category": "food"},
+{"es": "verde (fruta)", "en": "unripe", "level": "B1", "category": "food"},
+{"es": "entrante", "en": "starter / appetizer", "level": "B1", "category": "food"},
+{"es": "plato principal", "en": "main course", "level": "B1", "category": "food"},
+{"es": "postre", "en": "dessert", "level": "B1", "category": "food"},
+{"es": "tentempié", "en": "snack", "level": "B1", "category": "food"},
+{"es": "aperitivo", "en": "aperitif", "level": "B1", "category": "food"},
+{"es": "guarnición", "en": "side dish", "level": "B1", "category": "food"},
+{"es": "estofado", "en": "stew", "level": "B1", "category": "food"},
+{"es": "asado", "en": "roast", "level": "B1", "category": "food"},
+{"es": "puré", "en": "mashed potatoes / puree", "level": "B1", "category": "food"},
+{"es": "relleno", "en": "stuffing", "level": "B1", "category": "food"},
+{"es": "empanado", "en": "breaded", "level": "B1", "category": "food"},
+{"es": "marinado", "en": "marinated", "level": "B1", "category": "food"},
+{"es": "a la plancha", "en": "griddled", "level": "B1", "category": "food"},
+{"es": "cortar en dados", "en": "to dice", "level": "B1", "category": "food"},
+{"es": "rebanar", "en": "to slice", "level": "B1", "category": "food"},
+{"es": "picar", "en": "to chop", "level": "B1", "category": "food"},
+{"es": "rallar", "en": "to grate", "level": "B1", "category": "food"},
+{"es": "batir", "en": "to whisk / to beat", "level": "B1", "category": "food"},
+{"es": "amasar", "en": "to knead", "level": "B1", "category": "food"},
+{"es": "mezclar", "en": "to mix / to blend", "level": "B1", "category": "food"},
+{"es": "dejar reposar", "en": "to let it rest", "level": "B1", "category": "food"},
+{"es": "precalentar", "en": "to preheat", "level": "B1", "category": "food"},
+{"es": "condimentar", "en": "to season", "level": "B1", "category": "food"},
+{"es": "decorar", "en": "to garnish", "level": "B1", "category": "food"},
+{"es": "receta", "en": "recipe", "level": "B1", "category": "food"},
+{"es": "ingrediente", "en": "ingredient", "level": "B1", "category": "food"},
+//Nivel B2 (Intermedio-Alto) - Cocina Internacional y Especialidades
+{"es": "antojito", "en": "street food / snack", "level": "B2", "category": "food"},
+{"es": "buñuelo", "en": "fritter", "level": "B2", "category": "food"},
+{"es": "ceviche", "en": "ceviche", "level": "B2", "category": "food"},
+{"es": "cuscús", "en": "couscous", "level": "B2", "category": "food"},
+{"es": "curry", "en": "curry", "level": "B2", "category": "food"},
+{"es": "edamame", "en": "edamame", "level": "B2", "category": "food"},
+{"es": "faláfel", "en": "falafel", "level": "B2", "category": "food"},
+{"es": "foie gras", "en": "foie gras", "level": "B2", "category": "food"},
+{"es": "guacamole", "en": "guacamole", "level": "B2", "category": "food"},
+{"es": "hummus", "en": "hummus", "level": "B2", "category": "food"},
+{"es": "kebab", "en": "kebab", "level": "B2", "category": "food"},
+{"es": "kimchi", "en": "kimchi", "level": "B2", "category": "food"},
+{"es": "lasaña", "en": "lasagna", "level": "B2", "category": "food"},
+{"es": "maki", "en": "maki roll", "level": "B2", "category": "food"},
+{"es": "mole", "en": "mole", "level": "B2", "category": "food"},
+{"es": "moussaka", "en": "moussaka", "level": "B2", "category": "food"},
+{"es": "naan", "en": "naan bread", "level": "B2", "category": "food"},
+{"es": "nigiri", "en": "nigiri", "level": "B2", "category": "food"},
+{"es": "paella", "en": "paella", "level": "B2", "category": "food"},
+{"es": "panettone", "en": "panettone", "level": "B2", "category": "food"},
+{"es": "panna cotta", "en": "panna cotta", "level": "B2", "category": "food"},
+{"es": "pesto", "en": "pesto", "level": "B2", "category": "food"},
+{"es": "pho", "en": "pho", "level": "B2", "category": "food"},
+{"es": "pierogi", "en": "pierogi", "level": "B2", "category": "food"},
+{"es": "ratatouille", "en": "ratatouille", "level": "B2", "category": "food"},
+{"es": "risotto", "en": "risotto", "level": "B2", "category": "food"},
+{"es": "sashimi", "en": "sashimi", "level": "B2", "category": "food"},
+{"es": "satay", "en": "satay", "level": "B2", "category": "food"},
+{"es": "souvlaki", "en": "souvlaki", "level": "B2", "category": "food"},
+{"es": "sushi", "en": "sushi", "level": "B2", "category": "food"},
+{"es": "taboulé", "en": "tabbouleh", "level": "B2", "category": "food"},
+{"es": "tagine", "en": "tagine", "level": "B2", "category": "food"},
+{"es": "tapas", "en": "tapas", "level": "B2", "category": "food"},
+{"es": "tempura", "en": "tempura", "level": "B2", "category": "food"},
+{"es": "teriyaki", "en": "teriyaki", "level": "B2", "category": "food"},
+{"es": "tiramisú", "en": "tiramisu", "level": "B2", "category": "food"},
+{"es": "tofu", "en": "tofu", "level": "B2", "category": "food"},
+{"es": "tortilla", "en": "tortilla", "level": "B2", "category": "food"},
+{"es": "wonton", "en": "wonton", "level": "B2", "category": "food"},
+{"es": "yakisoba", "en": "yakisoba", "level": "B2", "category": "food"},
+{"es": "achiote", "en": "annatto", "level": "B2", "category": "food"},
+{"es": "albóndiga", "en": "meatball", "level": "B2", "category": "food"},
+{"es": "al dente", "en": "al dente", "level": "B2", "category": "food"},
+{"es": "baguette", "en": "baguette", "level": "B2", "category": "food"},
+{"es": "brioche", "en": "brioche", "level": "B2", "category": "food"},
+{"es": "chutney", "en": "chutney", "level": "B2", "category": "food"},
+{"es": "confit", "en": "confit", "level": "B2", "category": "food"},
+{"es": "crème brûlée", "en": "crème brûlée", "level": "B2", "category": "food"},
+{"es": "croissant", "en": "croissant", "level": "B2", "category": "food"},
+{"es": "degustación", "en": "tasting", "level": "B2", "category": "food"},
+//Nivel C1 (Avanzado) - Gastronomía, Técnicas y Nutrición
+{"es": "deshidratar", "en": "to dehydrate", "level": "C1", "category": "food"},
+{"es": "escalfar", "en": "to poach", "level": "C1", "category": "food"},
+{"es": "glasear", "en": "to glaze", "level": "C1", "category": "food"},
+{"es": "liofilizar", "en": "to freeze-dry", "level": "C1", "category": "food"},
+{"es": "macerar", "en": "to macerate", "level": "C1", "category": "food"},
+{"es": "maceración", "en": "maceración", "level": "C1", "category": "food"},
+{"es": "sous-vide", "en": "sous-vide", "level": "C1", "category": "food"},
+{"es": "temperar", "en": "to temper (chocolate)", "level": "C1", "category": "food"},
+{"es": "trinchar", "en": "to carve", "level": "C1", "category": "food"},
+{"es": "ahumar", "en": "to smoke", "level": "C1", "category": "food"},
+{"es": "amargor", "en": "bitterness", "level": "C1", "category": "food"},
+{"es": "umami", "en": "umami", "level": "C1", "category": "food"},
+{"es": "carmelizar", "en": "to caramelize", "level": "C1", "category": "food"},
+{"es": "desglasar", "en": "to deglaze", "level": "C1", "category": "food"},
+{"es": "emulsión", "en": "emulsion", "level": "C1", "category": "food"},
+{"es": "espuma", "en": "foam", "level": "C1", "category": "food"},
+{"es": "gelificación", "en": "gelification", "level": "C1", "category": "food"},
+{"es": "esferificación", "en": "spherification", "level": "C1", "category": "food"},
+{"es": "gastronomía molecular", "en": "molecular gastronomy", "level": "C1", "category": "food"},
+{"es": "maridaje", "en": "wine pairing", "level": "C1", "category": "food"},
+{"es": "sommelier", "en": "sommelier", "level": "C1", "category": "food"},
+{"es": "maître", "en": "maître d'", "level": "C1", "category": "food"},
+{"es": "degustador", "en": "taster", "level": "C1", "category": "food"},
+{"es": "paladar", "en": "palate", "level": "C1", "category": "food"},
+{"es": "bouquet", "en": "bouquet", "level": "C1", "category": "food"},
+{"es": "cata", "en": "tasting", "level": "C1", "category": "food"},
+{"es": "terroir", "en": "terroir", "level": "C1", "category": "food"},
+{"es": "enólogo", "en": "oenologist", "level": "C1", "category": "food"},
+{"es": "nutricionista", "en": "nutritionist", "level": "C1", "category": "food"},
+{"es": "dietista", "en": "dietitian", "level": "C1", "category": "food"},
+{"es": "macronutriente", "en": "macronutrient", "level": "C1", "category": "food"},
+{"es": "micronutriente", "en": "micronutrient", "level": "C1", "category": "food"},
+{"es": "antioxidante", "en": "antioxidant", "level": "C1", "category": "food"},
+{"es": "probiótico", "en": "probiotic", "level": "C1", "category": "food"},
+{"es": "prebiótico", "en": "prebiotic", "level": "C1", "category": "food"},
+{"es": "orgánico", "en": "organic", "level": "C1", "category": "food"},
+{"es": "transgénico", "en": "genetically modified (GM)", "level": "C1", "category": "food"},
+{"es": "kilocaloría", "en": "kilocalorie", "level": "C1", "category": "food"},
+{"es": "intolerancia alimentaria", "en": "food intolerance", "level": "C1", "category": "food"},
+{"es": "alergia", "en": "allergy", "level": "C1", "category": "food"},
+{"es": "celiaquía", "en": "coeliac disease (UK) / celiac disease (US)", "level": "C1", "category": "food"},
+{"es": "veganismo", "en": "veganism", "level": "C1", "category": "food"},
+{"es": "crudivegano", "en": "raw vegan", "level": "C1", "category": "food"},
+{"es": "pescetarianismo", "en": "pescetarianism", "level": "C1", "category": "food"},
+{"es": "flexitariano", "en": "flexitarian", "level": "C1", "category": "food"},
+{"es": "locávoro", "en": "locavore", "level": "C1", "category": "food"},
+{"es": "slow food", "en": "slow food", "level": "C1", "category": "food"},
+{"es": "foodie", "en": "foodie", "level": "C1", "category": "food"},
+{"es": "gourmet", "en": "gourmet", "level": "C1", "category": "food"},
+{"es": "haute cuisine", "en": "haute cuisine", "level": "C1", "category": "food"},
+{"es": "bistro", "en": "bistro", "level": "C1", "category": "food"},
+{"es": "brasserie", "en": "brasserie", "level": "C1", "category": "food"},
+        // Nivel A1 (Básico) - Adjetivos Fundamentales
         {"es": "alto", "en": "tall", "level": "A1", "category": "adjectives"},
-        {"es": "bajo", "en": "short", "level": "A1", "category": "adjectives"},
-        {"es": "feliz", "en": "happy", "level": "A1", "category": "adjectives"},
-        {"es": "triste", "en": "sad", "level": "A1", "category": "adjectives"},
-        {"es": "inteligente", "en": "smart", "level": "A2", "category": "adjectives"},
-        {"es": "interesante", "en": "interesting", "level": "A2", "category": "adjectives"},
-        {"es": "difícil", "en": "difficult", "level": "A2", "category": "adjectives"}
-      ],
+{"es": "bajo", "en": "short (height)", "level": "A1", "category": "adjectives"},
+{"es": "grande", "en": "big", "level": "A1", "category": "adjectives"},
+{"es": "pequeño", "en": "small", "level": "A1", "category": "adjectives"},
+{"es": "joven", "en": "young", "level": "A1", "category": "adjectives"},
+{"es": "viejo", "en": "old", "level": "A1", "category": "adjectives"},
+{"es": "bueno", "en": "good", "level": "A1", "category": "adjectives"},
+{"es": "malo", "en": "bad", "level": "A1", "category": "adjectives"},
+{"es": "bonito", "en": "pretty", "level": "A1", "category": "adjectives"},
+{"es": "feo", "en": "ugly", "level": "A1", "category": "adjectives"},
+{"es": "fácil", "en": "easy", "level": "A1", "category": "adjectives"},
+{"es": "difícil", "en": "difficult", "level": "A1", "category": "adjectives"},
+{"es": "barato", "en": "cheap", "level": "A1", "category": "adjectives"},
+{"es": "caro", "en": "expensive", "level": "A1", "category": "adjectives"},
+{"es": "feliz", "en": "happy", "level": "A1", "category": "adjectives"},
+{"es": "triste", "en": "sad", "level": "A1", "category": "adjectives"},
+{"es": "nuevo", "en": "new", "level": "A1", "category": "adjectives"},
+{"es": "viejo (objeto)", "en": "old", "level": "A1", "category": "adjectives"},
+{"es": "caliente", "en": "hot", "level": "A1", "category": "adjectives"},
+{"es": "frío", "en": "cold", "level": "A1", "category": "adjectives"},
+{"es": "rápido", "en": "fast", "level": "A1", "category": "adjectives"},
+{"es": "lento", "en": "slow", "level": "A1", "category": "adjectives"},
+{"es": "fuerte", "en": "strong", "level": "A1", "category": "adjectives"},
+{"es": "débil", "en": "weak", "level": "A1", "category": "adjectives"},
+{"es": "limpio", "en": "clean", "level": "A1", "category": "adjectives"},
+{"es": "sucio", "en": "dirty", "level": "A1", "category": "adjectives"},
+{"es": "correcto", "en": "right", "level": "A1", "category": "adjectives"},
+{"es": "incorrecto", "en": "wrong", "level": "A1", "category": "adjectives"},
+{"es": "abierto", "en": "open", "level": "A1", "category": "adjectives"},
+{"es": "cerrado", "en": "closed", "level": "A1", "category": "adjectives"},
+{"es": "ligero", "en": "light", "level": "A1", "category": "adjectives"},
+{"es": "pesado", "en": "heavy", "level": "A1", "category": "adjectives"},
+{"es": "duro", "en": "hard", "level": "A1", "category": "adjectives"},
+{"es": "blando", "en": "soft", "level": "A1", "category": "adjectives"},
+{"es": "rico", "en": "rich / tasty", "level": "A1", "category": "adjectives"},
+{"es": "pobre", "en": "poor", "level": "A1", "category": "adjectives"},
+{"es": "lleno", "en": "full", "level": "A1", "category": "adjectives"},
+{"es": "vacío", "en": "empty", "level": "A1", "category": "adjectives"},
+{"es": "ancho", "en": "wide", "level": "A1", "category": "adjectives"},
+{"es": "estrecho", "en": "narrow", "level": "A1", "category": "adjectives"},
+{"es": "cómodo", "en": "comfortable", "level": "A1", "category": "adjectives"},
+{"es": "incómodo", "en": "uncomfortable", "level": "A1", "category": "adjectives"},
+{"es": "ocupado", "en": "busy", "level": "A1", "category": "adjectives"},
+{"es": "libre", "en": "free", "level": "A1", "category": "adjectives"},
+{"es": "peligroso", "en": "dangerous", "level": "A1", "category": "adjectives"},
+{"es": "seguro", "en": "safe", "level": "A1", "category": "adjectives"},
+{"es": "sano", "en": "healthy", "level": "A1", "category": "adjectives"},
+{"es": "enfermo", "en": "sick", "level": "A1", "category": "adjectives"},
+{"es": "cerca", "en": "near", "level": "A1", "category": "adjectives"},
+{"es": "lejos", "en": "far", "level": "A1", "category": "adjectives"},
+//Nivel A2 (Básico+) - Adjetivos Descriptivos Comunes
+{"es": "alegre", "en": "cheerful", "level": "A2", "category": "adjectives"},
+{"es": "enojado", "en": "angry", "level": "A2", "category": "adjectives"},
+{"es": "cansado", "en": "tired", "level": "A2", "category": "adjectives"},
+{"es": "sorprendido", "en": "surprised", "level": "A2", "category": "adjectives"},
+{"es": "asustado", "en": "scared", "level": "A2", "category": "adjectives"},
+{"es": "aburrido", "en": "boring", "level": "A2", "category": "adjectives"},
+{"es": "interesante", "en": "interesting", "level": "A2", "category": "adjectives"},
+{"es": "importante", "en": "important", "level": "A2", "category": "adjectives"},
+{"es": "imposible", "en": "impossible", "level": "A2", "category": "adjectives"},
+{"es": "posible", "en": "possible", "level": "A2", "category": "adjectives"},
+{"es": "necesario", "en": "necessary", "level": "A2", "category": "adjectives"},
+{"es": "brillante", "en": "bright", "level": "A2", "category": "adjectives"},
+{"es": "oscuro", "en": "dark", "level": "A2", "category": "adjectives"},
+{"es": "ruidoso", "en": "noisy", "level": "A2", "category": "adjectives"},
+{"es": "silencioso", "en": "quiet", "level": "A2", "category": "adjectives"},
+{"es": "moderno", "en": "modern", "level": "A2", "category": "adjectives"},
+{"es": "antiguo", "en": "ancient", "level": "A2", "category": "adjectives"},
+{"es": "natural", "en": "natural", "level": "A2", "category": "adjectives"},
+{"es": "artificial", "en": "artificial", "level": "A2", "category": "adjectives"},
+{"es": "simple", "en": "simple", "level": "A2", "category": "adjectives"},
+{"es": "complicado", "en": "complicated", "level": "A2", "category": "adjectives"},
+{"es": "útil", "en": "useful", "level": "A2", "category": "adjectives"},
+{"es": "inútil", "en": "useless", "level": "A2", "category": "adjectives"},
+{"es": "común", "en": "common", "level": "A2", "category": "adjectives"},
+{"es": "raro", "en": "strange", "level": "A2", "category": "adjectives"},
+{"es": "perfecto", "en": "perfect", "level": "A2", "category": "adjectives"},
+{"es": "horrible", "en": "awful", "level": "A2", "category": "adjectives"},
+{"es": "maravilloso", "en": "wonderful", "level": "A2", "category": "adjectives"},
+{"es": "terrible", "en": "terrible", "level": "A2", "category": "adjectives"},
+{"es": "delicioso", "en": "delicious", "level": "A2", "category": "adjectives"},
+{"es": "divertido", "en": "fun", "level": "A2", "category": "adjectives"},
+{"es": "serio", "en": "serious", "level": "A2", "category": "adjectives"},
+{"es": "tímido", "en": "shy", "level": "A2", "category": "adjectives"},
+{"es": "valiente", "en": "brave", "level": "A2", "category": "adjectives"},
+{"es": "perezoso", "en": "lazy", "level": "A2", "category": "adjectives"},
+{"es": "trabajador", "en": "hardworking", "level": "A2", "category": "adjectives"},
+{"es": "amable", "en": "kind", "level": "A2", "category": "adjectives"},
+{"es": "grosero", "en": "rude", "level": "A2", "category": "adjectives"},
+{"es": "generoso", "en": "generous", "level": "A2", "category": "adjectives"},
+{"es": "egoísta", "en": "selfish", "level": "A2", "category": "adjectives"},
+{"es": "optimista", "en": "optimistic", "level": "A2", "category": "adjectives"},
+{"es": "pesimista", "en": "pessimistic", "level": "A2", "category": "adjectives"},
+{"es": "calmado", "en": "calm", "level": "A2", "category": "adjectives"},
+{"es": "nervioso", "en": "nervous", "level": "A2", "category": "adjectives"},
+{"es": "sincero", "en": "sincere", "level": "A2", "category": "adjectives"},
+{"es": "falso", "en": "fake", "level": "A2", "category": "adjectives"},
+{"es": "húmedo", "en": "wet", "level": "A2", "category": "adjectives"},
+{"es": "seco", "en": "dry", "level": "A2", "category": "adjectives"},
+{"es": "afilado", "en": "sharp", "level": "A2", "category": "adjectives"},
+{"es": "romo", "en": "dull", "level": "A2", "category": "adjectives"},
+//Nivel B1 (Intermedio) - Adjetivos para Matices y Estados
+{"es": "absoluto", "en": "absolute", "level": "B1", "category": "adjectives"},
+{"es": "relativo", "en": "relative", "level": "B1", "category": "adjectives"},
+{"es": "apropiado", "en": "appropriate", "level": "B1", "category": "adjectives"},
+{"es": "inapropiado", "en": "inappropriate", "level": "B1", "category": "adjectives"},
+{"es": "consciente", "en": "aware", "level": "B1", "category": "adjectives"},
+{"es": "inconsciente", "en": "unaware", "level": "B1", "category": "adjectives"},
+{"es": "conveniente", "en": "convenient", "level": "B1", "category": "adjectives"},
+{"es": "inconveniente", "en": "inconvenient", "level": "B1", "category": "adjectives"},
+{"es": "creíble", "en": "believable", "level": "B1", "category": "adjectives"},
+{"es": "increíble", "en": "unbelievable", "level": "B1", "category": "adjectives"},
+{"es": "decidido", "en": "determined", "level": "B1", "category": "adjectives"},
+{"es": "indeciso", "en": "indecisive", "level": "B1", "category": "adjectives"},
+{"es": "eficaz", "en": "effective", "level": "B1", "category": "adjectives"},
+{"es": "ineficaz", "en": "ineffective", "level": "B1", "category": "adjectives"},
+{"es": "elástico", "en": "elastic", "level": "B1", "category": "adjectives"},
+{"es": "rígido", "en": "rigid", "level": "B1", "category": "adjectives"},
+{"es": "esencial", "en": "essential", "level": "B1", "category": "adjectives"},
+{"es": "prescindible", "en": "dispensable", "level": "B1", "category": "adjectives"},
+{"es": "evidente", "en": "obvious", "level": "B1", "category": "adjectives"},
+{"es": "ambiguo", "en": "ambiguous", "level": "B1", "category": "adjectives"},
+{"es": "exigente", "en": "demanding", "level": "B1", "category": "adjectives"},
+{"es": "flexible", "en": "flexible", "level": "B1", "category": "adjectives"},
+{"es": "formal", "en": "formal", "level": "B1", "category": "adjectives"},
+{"es": "informal", "en": "informal", "level": "B1", "category": "adjectives"},
+{"es": "frecuente", "en": "frequent", "level": "B1", "category": "adjectives"},
+{"es": "infrecuente", "en": "infrequent", "level": "B1", "category": "adjectives"},
+{"es": "gradual", "en": "gradual", "level": "B1", "category": "adjectives"},
+{"es": "repentino", "en": "sudden", "level": "B1", "category": "adjectives"},
+{"es": "inmediato", "en": "immediate", "level": "B1", "category": "adjectives"},
+{"es": "paciente", "en": "patient", "level": "B1", "category": "adjectives"},
+{"es": "impaciente", "en": "impatient", "level": "B1", "category": "adjectives"},
+{"es": "lógico", "en": "logical", "level": "B1", "category": "adjectives"},
+{"es": "ilógico", "en": "illogical", "level": "B1", "category": "adjectives"},
+{"es": "maduro", "en": "mature", "level": "B1", "category": "adjectives"},
+{"es": "inmaduro", "en": "immature", "level": "B1", "category": "adjectives"},
+{"es": "orgulloso", "en": "proud", "level": "B1", "category": "adjectives"},
+{"es": "humilde", "en": "humble", "level": "B1", "category": "adjectives"},
+{"es": "potencial", "en": "potential", "level": "B1", "category": "adjectives"},
+{"es": "real", "en": "actual", "level": "B1", "category": "adjectives"},
+{"es": "práctico", "en": "practical", "level": "B1", "category": "adjectives"},
+{"es": "teórico", "en": "theoretical", "level": "B1", "category": "adjectives"},
+{"es": "privado", "en": "private", "level": "B1", "category": "adjectives"},
+{"es": "público", "en": "public", "level": "B1", "category": "adjectives"},
+{"es": "razonable", "en": "reasonable", "level": "B1", "category": "adjectives"},
+{"es": "irrazonable", "en": "unreasonable", "level": "B1", "category": "adjectives"},
+{"es": "responsable", "en": "responsible", "level": "B1", "category": "adjectives"},
+{"es": "irresponsable", "en": "irresponsible", "level": "B1", "category": "adjectives"},
+{"es": "sensible", "en": "sensitive", "level": "B1", "category": "adjectives"},
+{"es": "insensible", "en": "insensitive", "level": "B1", "category": "adjectives"},
+{"es": "superficial", "en": "superficial", "level": "B1", "category": "adjectives"},
+{"es": "profundo", "en": "deep", "level": "B1", "category": "adjectives"},
+{"es": "temporal", "en": "temporary", "level": "B1", "category": "adjectives"},
+{"es": "permanente", "en": "permanent", "level": "B1", "category": "adjectives"},
+//Nivel B2 (Intermedio-Alto) - Adjetivos Abstractos y Específicos
+{"es": "abrumador", "en": "overwhelming", "level": "B2", "category": "adjectives"},
+{"es": "admirable", "en": "admirable", "level": "B2", "category": "adjectives"},
+{"es": "alternativo", "en": "alternative", "level": "B2", "category": "adjectives"},
+{"es": "ambicioso", "en": "ambitious", "level": "B2", "category": "adjectives"},
+{"es": "arriesgado", "en": "risky", "level": "B2", "category": "adjectives"},
+{"es": "auténtico", "en": "authentic", "level": "B2", "category": "adjectives"},
+{"es": "consistente", "en": "consistent", "level": "B2", "category": "adjectives"},
+{"es": "contradictorio", "en": "contradictory", "level": "B2", "category": "adjectives"},
+{"es": "convencional", "en": "conventional", "level": "B2", "category": "adjectives"},
+{"es": "creativo", "en": "creative", "level": "B2", "category": "adjectives"},
+{"es": "crucial", "en": "crucial", "level": "B2", "category": "adjectives"},
+{"es": "cuidadoso", "en": "careful", "level": "B2", "category": "adjectives"},
+{"es": "descuidado", "en": "careless", "level": "B2", "category": "adjectives"},
+{"es": "detallado", "en": "detailed", "level": "B2", "category": "adjectives"},
+{"es": "dudoso", "en": "doubtful", "level": "B2", "category": "adjectives"},
+{"es": "eficiente", "en": "efficient", "level": "B2", "category": "adjectives"},
+{"es": "elocuente", "en": "eloquent", "level": "B2", "category": "adjectives"},
+{"es": "espectacular", "en": "spectacular", "level": "B2", "category": "adjectives"},
+{"es": "estable", "en": "stable", "level": "B2", "category": "adjectives"},
+{"es": "estricto", "en": "strict", "level": "B2", "category": "adjectives"},
+{"es": "excepcional", "en": "exceptional", "level": "B2", "category": "adjectives"},
+{"es": "excesivo", "en": "excessive", "level": "B2", "category": "adjectives"},
+{"es": "exhaustivo", "en": "exhaustive", "level": "B2", "category": "adjectives"},
+{"es": "extraordinario", "en": "extraordinary", "level": "B2", "category": "adjectives"},
+{"es": "favorable", "en": "favourable (UK) / favorable (US)", "level": "B2", "category": "adjectives"},
+{"es": "frustrante", "en": "frustrating", "level": "B2", "category": "adjectives"},
+{"es": "fundamental", "en": "fundamental", "level": "B2", "category": "adjectives"},
+{"es": "genuino", "en": "genuine", "level": "B2", "category": "adjectives"},
+{"es": "hipócrita", "en": "hypocritical", "level": "B2", "category": "adjectives"},
+{"es": "ideal", "en": "ideal", "level": "B2", "category": "adjectives"},
+{"es": "ilegal", "en": "illegal", "level": "B2", "category": "adjectives"},
+{"es": "impresionante", "en": "impressive", "level": "B2", "category": "adjectives"},
+{"es": "incompetente", "en": "incompetent", "level": "B2", "category": "adjectives"},
+{"es": "independiente", "en": "independent", "level": "B2", "category": "adjectives"},
+{"es": "inevitable", "en": "inevitable", "level": "B2", "category": "adjectives"},
+{"es": "influYente", "en": "influential", "level": "B2", "category": "adjectives"},
+{"es": "ingenioso", "en": "ingenious", "level": "B2", "category": "adjectives"},
+{"es": "inicial", "en": "initial", "level": "B2", "category": "adjectives"},
+{"es": "injusto", "en": "unfair", "level": "B2", "category": "adjectives"},
+{"es": "innovador", "en": "innovative", "level": "B2", "category": "adjectives"},
+{"es": "intenso", "en": "intense", "level": "B2", "category": "adjectives"},
+{"es": "intuitivo", "en": "intuitive", "level": "B2", "category": "adjectives"},
+{"es": "magnífico", "en": "magnificent", "level": "B2", "category": "adjectives"},
+{"es": "notable", "en": "remarkable", "level": "B2", "category": "adjectives"},
+{"es": "objetivo", "en": "objective", "level": "B2", "category": "adjectives"},
+{"es": "optimista", "en": "optimistic", "level": "B2", "category": "adjectives"},
+{"es": "pesimista", "en": "pessimistic", "level": "B2", "category": "adjectives"},
+{"es": "preciso", "en": "accurate", "level": "B2", "category": "adjectives"},
+{"es": "predecible", "en": "predictable", "level": "B2", "category": "adjectives"},
+{"es": "puntual", "en": "punctual", "level": "B2", "category": "adjectives"},
+{"es": "radical", "en": "radical", "level": "B2", "category": "adjectives"},
+//Nivel C1 (Avanzado) - Adjetivos de Alta Especificidad y Abstracción
+{"es": "abstruso", "en": "abstruse", "level": "C1", "category": "adjectives"},
+{"es": "acérrimo", "en": "staunch", "level": "C1", "category": "adjectives"},
+{"es": "acuciante", "en": "pressing", "level": "C1", "category": "adjectives"},
+{"es": "aleatorio", "en": "random", "level": "C1", "category": "adjectives"},
+{"es": "ambiguo", "en": "ambiguous", "level": "C1", "category": "adjectives"},
+{"es": "anacrónico", "en": "anachronistic", "level": "C1", "category": "adjectives"},
+{"es": "incuestionable", "en": "unquestionable", "level": "C1", "category": "adjectives"},
+{"es": "insondable", "en": "unfathomable", "level": "C1", "category": "adjectives"},
+{"es": "insuperable", "en": "unsurpassable", "level": "C1", "category": "adjectives"},
+{"es": "intrínseco", "en": "intrinsic", "level": "C1", "category": "adjectives"},
+{"es": "inverosímil", "en": "implausible", "level": "C1", "category": "adjectives"},
+{"es": "irreversible", "en": "irreversible", "level": "C1", "category": "adjectives"},
+{"es": "lacónico", "en": "laconic", "level": "C1", "category": "adjectives"},
+{"es": "meticuloso", "en": "meticulous", "level": "C1", "category": "adjectives"},
+{"es": "minucioso", "en": "thorough", "level": "C1", "category": "adjectives"},
+{"es": "morboso", "en": "morbid", "level": "C1", "category": "adjectives"},
+{"es": "obsoleto", "en": "obsolete", "level": "C1", "category": "adjectives"},
+{"es": "oneroso", "en": "burdensome", "level": "C1", "category": "adjectives"},
+{"es": "oprobioso", "en": "opprobrious", "level": "C1", "category": "adjectives"},
+{"es": "pérfido", "en": "perfidious", "level": "C1", "category": "adjectives"},
+{"es": "perenne", "en": "perennial", "level": "C1", "category": "adjectives"},
+{"es": "perspicaz", "en": "perspicacious", "level": "C1", "category": "adjectives"},
+{"es": "perverso", "en": "perverse", "level": "C1", "category": "adjectives"},
+{"es": "pormenorizado", "en": "detailed", "level": "C1", "category": "adjectives"},
+{"es": "precoz", "en": "precocious", "level": "C1", "category": "adjectives"},
+{"es": "proclive", "en": "prone", "level": "C1", "category": "adjectives"},
+{"es": "prolífico", "en": "prolific", "level": "C1", "category": "adjectives"},
+{"es": "próspero", "en": "prosperous", "level": "C1", "category": "adjectives"},
+{"es": "prudente", "en": "prudent", "level": "C1", "category": "adjectives"},
+{"es": "cuestionable", "en": "questionable", "level": "C1", "category": "adjectives"},
+{"es": "quijotesco", "en": "quixotic", "level": "C1", "category": "adjectives"},
+{"es": "rancio", "en": "rancid", "level": "C1", "category": "adjectives"},
+{"es": "reacio", "en": "reluctant", "level": "C1", "category": "adjectives"},
+{"es": "redundante", "en": "redundant", "level": "C1", "category": "adjectives"},
+{"es": "refinado", "en": "refined", "level": "C1", "category": "adjectives"},
+{"es": "relevante", "en": "relevant", "level": "C1", "category": "adjectives"},
+{"es": "remiso", "en": "hesitant", "level": "C1", "category": "adjectives"},
+{"es": "renuente", "en": "reluctant", "level": "C1", "category": "adjectives"},
+{"es": "reticente", "en": "reticent", "level": "C1", "category": "adjectives"},
+{"es": "sagaz", "en": "shrewd", "level": "C1", "category": "adjectives"},
+{"es": "salAZ", "en": "salacious", "level": "C1", "category": "adjectives"},
+{"es": "sesgado", "en": "biased", "level": "C1", "category": "adjectives"},
+{"es": "soberbio", "en": "arrogant", "level": "C1", "category": "adjectives"},
+{"es": "sucinto", "en": "succinct", "level": "C1", "category": "adjectives"},
+{"es": "superfluo", "en": "superfluous", "level": "C1", "category": "adjectives"},
+{"es": "tajante", "en": "categorical", "level": "C1", "category": "adjectives"},
+{"es": "tenaz", "en": "tenacious", "level": "C1", "category": "adjectives"},
+{"es": "trivial", "en": "trivial", "level": "C1", "category": "adjectives"},
+{"es": "ultrajante", "en": "outrageous", "level": "C1", "category": "adjectives"},
+{"es": "unánime", "en": "unanimous", "level": "C1", "category": "adjectives"},
+{"es": "vanguardista", "en": "avant-garde", "level": "C1", "category": "adjectives"},
+{"es": "versátil", "en": "versatile", "level": "C1", "category": "adjectives"},
+{"es": "vehemente", "en": "vehement", "level": "C1", "category": "adjectives"},
+{"es": "vulnerable", "en": "vulnerable", "level": "C1", "category": "adjectives"},
+
+//SUSTANTIVOS
+//SUSTANTIVOS FUNDAMENTALES A1
+{"es": "casa", "en": "house", "level": "A1", "category": "nouns"},
+{"es": "perro", "en": "dog", "level": "A1", "category": "nouns"},
+{"es": "gato", "en": "cat", "level": "A1", "category": "nouns"},
+{"es": "familia", "en": "family", "level": "A1", "category": "nouns"},
+{"es": "padre", "en": "father", "level": "A1", "category": "nouns"},
+{"es": "madre", "en": "mother", "level": "A1", "category": "nouns"},
+{"es": "hermano", "en": "brother", "level": "A1", "category": "nouns"},
+{"es": "hermana", "en": "sister", "level": "A1", "category": "nouns"},
+{"es": "amigo", "en": "friend", "level": "A1", "category": "nouns"},
+{"es": "ciudad", "en": "city", "level": "A1", "category": "nouns"},
+{"es": "calle", "en": "street", "level": "A1", "category": "nouns"},
+{"es": "coche", "en": "car", "level": "A1", "category": "nouns"},
+{"es": "agua", "en": "water", "level": "A1", "category": "nouns"},
+{"es": "comida", "en": "food", "level": "A1", "category": "nouns"},
+{"es": "tiempo", "en": "time", "level": "A1", "category": "nouns"},
+{"es": "día", "en": "day", "level": "A1", "category": "nouns"},
+{"es": "noche", "en": "night", "level": "A1", "category": "nouns"},
+{"es": "sol", "en": "sun", "level": "A1", "category": "nouns"},
+{"es": "luna", "en": "moon", "level": "A1", "category": "nouns"},
+{"es": "mes", "en": "month", "level": "A1", "category": "nouns"},
+{"es": "año", "en": "year", "level": "A1", "category": "nouns"},
+{"es": "país", "en": "country", "level": "A1", "category": "nouns"},
+{"es": "nombre", "en": "name", "level": "A1", "category": "nouns"},
+{"es": "hombre", "en": "man", "level": "A1", "category": "nouns"},
+{"es": "mujer", "en": "woman", "level": "A1", "category": "nouns"},
+{"es": "niño", "en": "child", "level": "A1", "category": "nouns"},
+{"es": "trabajo", "en": "work", "level": "A1", "category": "nouns"},
+{"es": "escuela", "en": "school", "level": "A1", "category": "nouns"},
+{"es": "libro", "en": "book", "level": "A1", "category": "nouns"},
+{"es": "bolígrafo", "en": "pen", "level": "A1", "category": "nouns"},
+{"es": "papel", "en": "paper", "level": "A1", "category": "nouns"},
+{"es": "dinero", "en": "money", "level": "A1", "category": "nouns"},
+{"es": "puerta", "en": "door", "level": "A1", "category": "nouns"},
+{"es": "ventana", "en": "window", "level": "A1", "category": "nouns"},
+{"es": "silla", "en": "chair", "level": "A1", "category": "nouns"},
+{"es": "mesa", "en": "table", "level": "A1", "category": "nouns"},
+{"es": "cama", "en": "bed", "level": "A1", "category": "nouns"},
+{"es": "ropa", "en": "clothes", "level": "A1", "category": "nouns"},
+{"es": "zapato", "en": "shoe", "level": "A1", "category": "nouns"},
+{"es": "tienda", "en": "shop", "level": "A1", "category": "nouns"},
+{"es": "precio", "en": "price", "level": "A1", "category": "nouns"},
+{"es": "vida", "en": "life", "level": "A1", "category": "nouns"},
+{"es": "persona", "en": "person", "level": "A1", "category": "nouns"},
+{"es": "problema", "en": "problem", "level": "A1", "category": "nouns"},
+{"es": "cabeza", "en": "head", "level": "A1", "category": "nouns"},
+{"es": "mano", "en": "hand", "level": "A1", "category": "nouns"},
+{"es": "pie", "en": "foot", "level": "A1", "category": "nouns"},
+{"es": "ojo", "en": "eye", "level": "A1", "category": "nouns"},
+{"es": "boca", "en": "mouth", "level": "A1", "category": "nouns"},
+{"es": "nariz", "en": "nose", "level": "A1", "category": "nouns"},
+//Nivel A2 (Básico+) - Sustantivos Cotidianos y Comunes
+{"es": "vecino", "en": "neighbour", "level": "A2", "category": "nouns"},
+{"es": "jefe", "en": "boss", "level": "A2", "category": "nouns"},
+{"es": "compañero", "en": "colleague", "level": "A2", "category": "nouns"},
+{"es": "ayuda", "en": "help", "level": "A2", "category": "nouns"},
+{"es": "consejo", "en": "advice", "level": "A2", "category": "nouns"},
+{"es": "idea", "en": "idea", "level": "A2", "category": "nouns"},
+{"es": "pensamiento", "en": "thought", "level": "A2", "category": "nouns"},
+{"es": "sueño", "en": "dream", "level": "A2", "category": "nouns"},
+{"es": "peligro", "en": "danger", "level": "A2", "category": "nouns"},
+{"es": "seguridad", "en": "safety", "level": "A2", "category": "nouns"},
+{"es": "amor", "en": "love", "level": "A2", "category": "nouns"},
+{"es": "odio", "en": "hate", "level": "A2", "category": "nouns"},
+{"es": "alegría", "en": "joy", "level": "A2", "category": "nouns"},
+{"es": "tristeza", "en": "sadness", "level": "A2", "category": "nouns"},
+{"es": "miedo", "en": "fear", "level": "A2", "category": "nouns"},
+{"es": "sorpresa", "en": "surprise", "level": "A2", "category": "nouns"},
+{"es": "éxito", "en": "success", "level": "A2", "category": "nouns"},
+{"es": "fracaso", "en": "failure", "level": "A2", "category": "nouns"},
+{"es": "cambio", "en": "change", "level": "A2", "category": "nouns"},
+{"es": "viaje", "en": "trip", "level": "A2", "category": "nouns"},
+{"es": "hotel", "en": "hotel", "level": "A2", "category": "nouns"},
+{"es": "avión", "en": "plane", "level": "A2", "category": "nouns"},
+{"es": "tren", "en": "train", "level": "A2", "category": "nouns"},
+{"es": "estación", "en": "station", "level": "A2", "category": "nouns"},
+{"es": "playa", "en": "beach", "level": "A2", "category": "nouns"},
+{"es": "montaña", "en": "mountain", "level": "A2", "category": "nouns"},
+{"es": "río", "en": "river", "level": "A2", "category": "nouns"},
+{"es": "lago", "en": "lake", "level": "A2", "category": "nouns"},
+{"es": "bosque", "en": "forest", "level": "A2", "category": "nouns"},
+{"es": "animal", "en": "animal", "level": "A2", "category": "nouns"},
+{"es": "pájaro", "en": "bird", "level": "A2", "category": "nouns"},
+{"es": "flor", "en": "flower", "level": "A2", "category": "nouns"},
+{"es": "árbol", "en": "tree", "level": "A2", "category": "nouns"},
+{"es": "comida", "en": "meal", "level": "A2", "category": "nouns"},
+{"es": "desayuno", "en": "breakfast", "level": "A2", "category": "nouns"},
+{"es": "almuerzo", "en": "lunch", "level": "A2", "category": "nouns"},
+{"es": "cena", "en": "dinner", "level": "A2", "category": "nouns"},
+{"es": "fiesta", "en": "party", "level": "A2", "category": "nouns"},
+{"es": "regalo", "en": "gift", "level": "A2", "category": "nouns"},
+{"es": "noticia", "en": "news", "level": "A2", "category": "nouns"},
+{"es": "historia", "en": "story", "level": "A2", "category": "nouns"},
+{"es": "película", "en": "movie", "level": "A2", "category": "nouns"},
+{"es": "música", "en": "music", "level": "A2", "category": "nouns"},
+{"es": "arte", "en": "art", "level": "A2", "category": "nouns"},
+{"es": "deporte", "en": "sport", "level": "A2", "category": "nouns"},
+{"es": "juego", "en": "game", "level": "A2", "category": "nouns"},
+{"es": "color", "en": "colour", "level": "A2", "category": "nouns"},
+{"es": "forma", "en": "shape", "level": "A2", "category": "nouns"},
+{"es": "tamaño", "en": "size", "level": "A2", "category": "nouns"},
+{"es": "edad", "en": "age", "level": "A2", "category": "nouns"},
+//Nivel B1 (Intermedio) - Sustantivos Abstractos y Específicos
+{"es": "acuerdo", "en": "agreement", "level": "B1", "category": "nouns"},
+{"es": "adulto", "en": "adult", "level": "B1", "category": "nouns"},
+{"es": "advertencia", "en": "warning", "level": "B1", "category": "nouns"},
+{"es": "apoyo", "en": "support", "level": "B1", "category": "nouns"},
+{"es": "avance", "en": "advance", "level": "B1", "category": "nouns"},
+{"es": "beneficio", "en": "benefit", "level": "B1", "category": "nouns"},
+{"es": "calidad", "en": "quality", "level": "B1", "category": "nouns"},
+{"es": "cambio", "en": "change", "level": "B1", "category": "nouns"},
+{"es": "carácter", "en": "character", "level": "B1", "category": "nouns"},
+{"es": "comportamiento", "en": "behaviour", "level": "B1", "category": "nouns"},
+{"es": "comunidad", "en": "community", "level": "B1", "category": "nouns"},
+{"es": "concepto", "en": "concept", "level": "B1", "category": "nouns"},
+{"es": "concierto", "en": "concert", "level": "B1", "category": "nouns"},
+{"es": "consecuencia", "en": "consequence", "level": "B1", "category": "nouns"},
+{"es": "crecimiento", "en": "growth", "level": "B1", "category": "nouns"},
+{"es": "daño", "en": "damage", "level": "B1", "category": "nouns"},
+{"es": "duda", "en": "doubt", "level": "B1", "category": "nouns"},
+{"es": "éxito", "en": "success", "level": "B1", "category": "nouns"},
+{"es": "experiencia", "en": "experience", "level": "B1", "category": "nouns"},
+{"es": "éxito", "en": "success", "level": "B1", "category": "nouns"},
+{"es": "fallo", "en": "failure", "level": "B1", "category": "nouns"},
+{"es": "frontera", "en": "border", "level": "B1", "category": "nouns"},
+{"es": "gestión", "en": "management", "level": "B1", "category": "nouns"},
+{"es": "habitante", "en": "inhabitant", "level": "B1", "category": "nouns"},
+{"es": "importancia", "en": "importance", "level": "B1", "category": "nouns"},
+{"es": "indicación", "en": "indication", "level": "B1", "category": "nouns"},
+{"es": "informe", "en": "report", "level": "B1", "category": "nouns"},
+{"es": "investigación", "en": "research", "level": "B1", "category": "nouns"},
+{"es": "lector", "en": "reader", "level": "B1", "category": "nouns"},
+{"es": "memoria", "en": "memory", "level": "B1", "category": "nouns"},
+{"es": "objetivo", "en": "objective", "level": "B1", "category": "nouns"},
+{"es": "oportunidad", "en": "opportunity", "level": "B1", "category": "nouns"},
+{"es": "origen", "en": "origin", "level": "B1", "category": "nouns"},
+{"es": "pérdida", "en": "loss", "level": "B1", "category": "nouns"},
+{"es": "peso", "en": "weight", "level": "B1", "category": "nouns"},
+{"es": "población", "en": "population", "level": "B1", "category": "nouns"},
+{"es": "posibilidad", "en": "possibility", "level": "B1", "category": "nouns"},
+{"es": "premio", "en": "prize", "level": "B1", "category": "nouns"},
+{"es": "presión", "en": "pressure", "level": "B1", "category": "nouns"},
+{"es": "proceso", "en": "process", "level": "B1", "category": "nouns"},
+{"es": "productor", "en": "producer", "level": "B1", "category": "nouns"},
+{"es": "recurso", "en": "resource", "level": "B1", "category": "nouns"},
+{"es": "reacción", "en": "reaction", "level": "B1", "category": "nouns"},
+{"es": "riesgo", "en": "risk", "level": "B1", "category": "nouns"},
+{"es": "sueño", "en": "dream", "level": "B1", "category": "nouns"},
+{"es": "técnica", "en": "technique", "level": "B1", "category": "nouns"},
+{"es": "teoría", "en": "theory", "level": "B1", "category": "nouns"},
+{"es": "valor", "en": "value", "level": "B1", "category": "nouns"},
+{"es": "ventaja", "en": "advantage", "level": "B1", "category": "nouns"},
+{"es": "voluntad", "en": "will", "level": "B1", "category": "nouns"},
+//B2
+{"es": "análisis", "en": "analysis", "level": "B2", "category": "nouns"},
+{"es": "aprobación", "en": "approval", "level": "B2", "category": "nouns"},
+{"es": "circunstancia", "en": "circumstance", "level": "B2", "category": "nouns"},
+{"es": "compromiso", "en": "commitment", "level": "B2", "category": "nouns"},
+{"es": "concepto", "en": "concept", "level": "B2", "category": "nouns"},
+{"es": "conciencia", "en": "awareness", "level": "B2", "category": "nouns"},
+{"es": "consecuencia", "en": "consequence", "level": "B2", "category": "nouns"},
+{"es": "consumidor", "en": "consumer", "level": "B2", "category": "nouns"},
+{"es": "criterio", "en": "criterion", "level": "B2", "category": "nouns"},
+{"es": "demanda", "en": "demand", "level": "B2", "category": "nouns"},
+{"es": "desarrollo", "en": "development", "level": "B2", "category": "nouns"},
+{"es": "diferencia", "en": "difference", "level": "B2", "category": "nouns"},
+{"es": "dificultad", "en": "difficulty", "level": "B2", "category": "nouns"},
+{"es": "discusión", "en": "discussion", "level": "B2", "category": "nouns"},
+{"es": "disposición", "en": "disposition", "level": "B2", "category": "nouns"},
+{"es": "énfasis", "en": "emphasis", "level": "B2", "category": "nouns"},
+{"es": "entorno", "en": "environment", "level": "B2", "category": "nouns"},
+{"es": "escenario", "en": "scenario", "level": "B2", "category": "nouns"},
+{"es": "evidencia", "en": "evidence", "level": "B2", "category": "nouns"},
+{"es": "expectativa", "en": "expectation", "level": "B2", "category": "nouns"},
+{"es": "éxito", "en": "success", "level": "B2", "category": "nouns"},
+{"es": "fracaso", "en": "failure", "level": "B2", "category": "nouns"},
+{"es": "funcionamiento", "en": "functioning", "level": "B2", "category": "nouns"},
+{"es": "garantía", "en": "guarantee", "level": "B2", "category": "nouns"},
+{"es": "gestión", "en": "management", "level": "B2", "category": "nouns"},
+{"es": "impacto", "en": "impact", "level": "B2", "category": "nouns"},
+{"es": "indicador", "en": "indicator", "level": "B2", "category": "nouns"},
+{"es": "individuo", "en": "individual", "level": "B2", "category": "nouns"},
+{"es": "influencia", "en": "influence", "level": "B2", "category": "nouns"},
+{"es": "infraestructura", "en": "infrastructure", "level": "B2", "category": "nouns"},
+{"es": "interpretación", "en": "interpretation", "level": "B2", "category": "nouns"},
+{"es": "investigación", "en": "research", "level": "B2", "category": "nouns"},
+{"es": "mantenimiento", "en": "maintenance", "level": "B2", "category": "nouns"},
+{"es": "medida", "en": "measure", "level": "B2", "category": "nouns"},
+{"es": "objetivo", "en": "objective", "level": "B2", "category": "nouns"},
+{"es": "origen", "en": "origin", "level": "B2", "category": "nouns"},
+{"es": "perspectiva", "en": "perspective", "level": "B2", "category": "nouns"},
+{"es": "principio", "en": "principle", "level": "B2", "category": "nouns"},
+{"es": "proceso", "en": "process", "level": "B2", "category": "nouns"},
+{"es": "propuesta", "en": "proposal", "level": "B2", "category": "nouns"},
+{"es": "recurso", "en": "resource", "level": "B2", "category": "nouns"},
+{"es": "referencia", "en": "reference", "level": "B2", "category": "nouns"},
+{"es": "reflejo", "en": "reflection", "level": "B2", "category": "nouns"},
+{"es": "requisito", "en": "requirement", "level": "B2", "category": "nouns"},
+{"es": "resultado", "en": "result", "level": "B2", "category": "nouns"},
+{"es": "sector", "en": "sector", "level": "B2", "category": "nouns"},
+{"es": "seguimiento", "en": "monitoring", "level": "B2", "category": "nouns"},
+{"es": "solución", "en": "solution", "level": "B2", "category": "nouns"},
+{"es": "tendencia", "en": "trend", "level": "B2", "category": "nouns"},
+{"es": "volumen", "en": "volume", "level": "B2", "category": "nouns"},
+//C1
+{"es": "abstracción", "en": "abstraction", "level": "C1", "category": "nouns"},
+{"es": "acuciante", "en": "pressing issue", "level": "C1", "category": "nouns"},
+{"es": "ambigüedad", "en": "ambiguity", "level": "C1", "category": "nouns"},
+{"es": "anomalía", "en": "anomaly", "level": "C1", "category": "nouns"},
+{"es": "apogeo", "en": "peak", "level": "C1", "category": "nouns"},
+{"es": "arzobispo", "en": "archbishop", "level": "C1", "category": "nouns"},
+{"es": "atemorizar", "en": "frightening", "level": "C1", "category": "nouns"},
+{"es": "baluarte", "en": "bulwark", "level": "C1", "category": "nouns"},
+{"es": "beneficiario", "en": "beneficiary", "level": "C1", "category": "nouns"},
+{"es": "cacofonía", "en": "cacophony", "level": "C1", "category": "nouns"},
+{"es": "candente", "en": "burning issue", "level": "C1", "category": "nouns"},
+{"es": "cariz", "en": "aspect", "level": "C1", "category": "nouns"},
+{"es": "cisma", "en": "schism", "level": "C1", "category": "nouns"},
+{"es": "colapso", "en": "collapse", "level": "C1", "category": "nouns"},
+{"es": "conjetura", "en": "conjecture", "level": "C1", "category": "nouns"},
+{"es": "contratiempo", "en": "setback", "level": "C1", "category": "nouns"},
+{"es": "corolario", "en": "corollary", "level": "C1", "category": "nouns"},
+{"es": "corpus", "en": "corpus", "level": "C1", "category": "nouns"},
+{"es": "deferencia", "en": "deference", "level": "C1", "category": "nouns"},
+{"es": "desfachatez", "en": "effrontery", "level": "C1", "category": "nouns"},
+{"es": "despropósito", "en": "absurdity", "level": "C1", "category": "nouns"},
+{"es": "dicotomía", "en": "dichotomy", "level": "C1", "category": "nouns"},
+{"es": "dilema", "en": "dilemma", "level": "C1", "category": "nouns"},
+{"es": "discreción", "en": "discretion", "level": "C1", "category": "nouns"},
+{"es": "disyuntiva", "en": "choice between two options", "level": "C1", "category": "nouns"},
+{"es": "efectividad", "en": "effectiveness", "level": "C1", "category": "nouns"},
+{"es": "emulación", "en": "emulation", "level": "C1", "category": "nouns"},
+{"es": "enajenación", "en": "alienation", "level": "C1", "category": "nouns"},
+{"es": "entidad", "en": "entity", "level": "C1", "category": "nouns"},
+{"es": "escrutinio", "en": "scrutiny", "level": "C1", "category": "nouns"},
+{"es": "estratagema", "en": "stratagem", "level": "C1", "category": "nouns"},
+{"es": "eufemismo", "en": "euphemism", "level": "C1", "category": "nouns"},
+{"es": "excentricidad", "en": "eccentricity", "level": "C1", "category": "nouns"},
+{"es": "facetas", "en": "facets", "level": "C1", "category": "nouns"},
+{"es": "falacia", "en": "fallacy", "level": "C1", "category": "nouns"},
+{"es": "frugalidad", "en": "frugality", "level": "C1", "category": "nouns"},
+{"es": "hedor", "en": "stench", "level": "C1", "category": "nouns"},
+{"es": "hibridación", "en": "hybridization", "level": "C1", "category": "nouns"},
+{"es": "hipótesis", "en": "hypothesis", "level": "C1", "category": "nouns"},
+{"es": "idiosincrasia", "en": "idiosyncrasy", "level": "C1", "category": "nouns"},
+{"es": "implicación", "en": "implication", "level": "C1", "category": "nouns"},
+{"es": "ineptitud", "en": "ineptitude", "level": "C1", "category": "nouns"},
+{"es": "inopia", "en": "poverty", "level": "C1", "category": "nouns"},
+{"es": "laconismo", "en": "laconicism", "level": "C1", "category": "nouns"},
+{"es": "magnanimidad", "en": "magnanimity", "level": "C1", "category": "nouns"},
+{"es": "meditación", "en": "meditation", "level": "C1", "category": "nouns"},
+{"es": "metáfora", "en": "metaphor", "level": "C1", "category": "nouns"},
+{"es": "nostalgia", "en": "nostalgia", "level": "C1", "category": "nouns"},
+{"es": "paradoja", "en": "paradox", "level": "C1", "category": "nouns"},
+{"es": "preludio", "en": "prelude", "level": "C1", "category": "nouns"}
+      ], // Aquí puedes añadir tu banco de palabras
       filteredWords: [],
       currentWord: {},
       score: 0,
@@ -1218,7 +2225,8 @@
         "verbs": "Verbos",
         "objects": "Objetos",
         "food": "Comida",
-        "adjectives": "Adjetivos"
+        "adjectives": "Adjetivos",
+        "nouns": "Sustantivos"
       };
       return categories[category] || category;
     }
@@ -1547,7 +2555,164 @@
         document.body.classList.remove("dark-mode");
       }
     }
+    
+    // ===== TECLADO VIRTUAL =====
+function initVirtualKeyboard() {
+  // Crear el teclado virtual
+  const keyboard = document.createElement('div');
+  keyboard.className = 'virtual-keyboard';
+  keyboard.innerHTML = `
+    <div class="keyboard-row">
+      <div class="keyboard-key" data-key="q">q</div>
+      <div class="keyboard-key" data-key="w">w</div>
+      <div class="keyboard-key" data-key="e">e</div>
+      <div class="keyboard-key" data-key="r">r</div>
+      <div class="keyboard-key" data-key="t">t</div>
+      <div class="keyboard-key" data-key="y">y</div>
+      <div class="keyboard-key" data-key="u">u</div>
+      <div class="keyboard-key" data-key="i">i</div>
+      <div class="keyboard-key" data-key="o">o</div>
+      <div class="keyboard-key" data-key="p">p</div>
+    </div>
+    <div class="keyboard-row">
+      <div class="keyboard-key" data-key="a">a</div>
+      <div class="keyboard-key" data-key="s">s</div>
+      <div class="keyboard-key" data-key="d">d</div>
+      <div class="keyboard-key" data-key="f">f</div>
+      <div class="keyboard-key" data-key="g">g</div>
+      <div class="keyboard-key" data-key="h">h</div>
+      <div class="keyboard-key" data-key="j">j</div>
+      <div class="keyboard-key" data-key="k">k</div>
+      <div class="keyboard-key" data-key="l">l</div>
+      <div class="keyboard-key" data-key="ñ">ñ</div>
+    </div>
+    <div class="keyboard-row">
+      <div class="keyboard-key" data-key="z">z</div>
+      <div class="keyboard-key" data-key="x">x</div>
+      <div class="keyboard-key" data-key="c">c</div>
+      <div class="keyboard-key" data-key="v">v</div>
+      <div class="keyboard-key" data-key="b">b</div>
+      <div class="keyboard-key" data-key="n">n</div>
+      <div class="keyboard-key" data-key="m">m</div>
+      <div class="keyboard-key keyboard-backspace" data-key="backspace">⌫</div>
+    </div>
+    <div class="keyboard-row">
+      <div class="keyboard-key keyboard-space" data-key=" ">Espacio</div>
+      <div class="keyboard-key keyboard-close" data-key="close">Cerrar</div>
+    </div>
+  `;
+  
+  document.body.appendChild(keyboard);
+  
+  // Variable para controlar si el teclado está visible
+  let keyboardVisible = false;
+  
+  // Función para mostrar el teclado
+  function showKeyboard() {
+    keyboard.classList.remove('keyboard-hide');
+    keyboardVisible = true;
+  }
+  
+  // Función para ocultar el teclado
+  function hideKeyboard() {
+    keyboard.classList.add('keyboard-hide');
+    keyboardVisible = false;
+  }
+  
+  // Función para toggle del teclado
+  function toggleKeyboard() {
+    if (keyboardVisible) {
+      hideKeyboard();
+    } else {
+      showKeyboard();
+    }
+  }
+  
+  // Event listeners para las teclas del teclado virtual
+  keyboard.addEventListener('click', function(e) {
+    const target = e.target;
+    if (!target.classList.contains('keyboard-key')) return;
+    
+    const key = target.getAttribute('data-key');
+    const input = document.getElementById('answer');
+    
+    if (key === 'backspace') {
+      // Borrar último carácter
+      input.value = input.value.slice(0, -1);
+    } else if (key === 'close') {
+      // Cerrar teclado
+      hideKeyboard();
+    } else {
+      // Añadir carácter
+      input.value += key;
+    }
+    
+    // Disparar evento input para notificar los cambios
+    const event = new Event('input', { bubbles: true });
+    input.dispatchEvent(event);
+    
+    // Mantener el foco en el input
+    input.focus();
+  });
+  
+  // Prevenir que aparezca el teclado nativo en dispositivos táctiles
+  document.getElementById('answer').addEventListener('focus', function(e) {
+    if ('ontouchstart' in window || navigator.maxTouchPoints) {
+      e.preventDefault();
+      showKeyboard();
+      
+      // Desplazar la vista para que el input sea visible
+      setTimeout(() => {
+        this.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 300);
+    }
+  });
+  
+  // Ocultar teclado cuando se hace clic fuera
+  document.addEventListener('click', function(e) {
+    if (keyboardVisible && 
+        !e.target.closest('.virtual-keyboard') && 
+        e.target.id !== 'answer') {
+      hideKeyboard();
+    }
+  });
+  
+  // También ocultar teclado al desplazarse
+  let scrollTimer;
+  window.addEventListener('scroll', function() {
+    if (keyboardVisible) {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(hideKeyboard, 100);
+    }
+  });
+  
+  // Añadir botón de toggle de teclado en móviles
+  if ('ontouchstart' in window || navigator.maxTouchPoints) {
+    const toggleBtn = document.createElement('button');
+    toggleBtn.innerHTML = '⌨️';
+    toggleBtn.style.position = 'fixed';
+    toggleBtn.style.right = '10px';
+    toggleBtn.style.bottom = '10px';
+    toggleBtn.style.zIndex = '999';
+    toggleBtn.style.width = '50px';
+    toggleBtn.style.height = '50px';
+    toggleBtn.style.borderRadius = '50%';
+    toggleBtn.style.background = '#4CAF50';
+    toggleBtn.style.color = 'white';
+    toggleBtn.style.border = 'none';
+    toggleBtn.style.fontSize = '20px';
+    toggleBtn.style.cursor = 'pointer';
+    toggleBtn.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
+    
+    toggleBtn.addEventListener('click', toggleKeyboard);
+    document.body.appendChild(toggleBtn);
+  }
+  
+  console.log('Teclado virtual inicializado correctamente');
+}
 
+// Inicializar el teclado virtual cuando la página cargue
+window.addEventListener('DOMContentLoaded', initVirtualKeyboard);
     // Inicializar juego cuando se carga la página
     window.onload = init;
   </script>
